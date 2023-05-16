@@ -1,6 +1,8 @@
 
 void getValues ( unsigned char *mem_base );
 
+int getDirection ( int value );
+
 int getRedValue ( unsigned char *mem_base );
 
 int getRedMovement ( unsigned char *mem_base, int initialValue );

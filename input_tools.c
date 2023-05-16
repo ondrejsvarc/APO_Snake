@@ -36,6 +36,19 @@ void getValues ( unsigned char *mem_base ) {
     greenValue = ( r>>8 )&0xff;
 }
 
+int getDirection ( int value ) {
+    if ( value > 16 && value <= 40 ) {
+        printf( "Goes right.\n" );
+        return 1;
+    } else if ( value > 40 && value < 64 ) {
+        printf( "Goes left.\n" );
+        return -1;
+    }
+    
+    printf( "Goes straight.\n" );
+    return 0;
+}
+
 int getRedValue ( unsigned char *mem_base ) {
     getValues( mem_base );
     return redValue;
@@ -45,17 +58,7 @@ int getRedMovement ( unsigned char *mem_base, int initialValue ) {
     int value = ( getRedValue( mem_base ) - initialValue ) % 80;
     value = value < 0 ? ( value + 240 ) % 80 : value;
     printf( "Red value: %d\n", value );
-
-    if ( value > 16 && value <= 40 ) {
-        printf( "Red goes right.\n" );
-        return 1;
-    } else if ( value > 40 && value < 64 ) {
-        printf( "Red goes left.\n" );
-        return -1;
-    }
-    
-    printf( "Red goes straight.\n" );
-    return 0;
+    return getDirection( value );
 }
 
 int getBlueValue ( unsigned char *mem_base ) {
@@ -68,16 +71,7 @@ int getBlueMovement ( unsigned char *mem_base, int initialValue ) {
     value = value < 0 ? ( value + 240 ) % 80 : value;
     printf( "Blue value: %d\n", value );
 
-    if ( value > 40 && value <= 128 ) {
-        printf( "Blue goes right.\n" );
-        return 1;
-    } else if ( value > 128 && value < 215 ) {
-        printf( "Blue goes left.\n" );
-        return -1;
-    }
-    
-    printf( "Blue goes straight.\n" );
-    return 0;
+    return getDirection( value );
 }
 
 int getGreenValue ( unsigned char *mem_base ) {
@@ -90,14 +84,5 @@ int getGreenMovement ( unsigned char *mem_base, int initialValue ) {
     value = value < 0 ? ( value + 240 ) % 80 : value;
     printf( "Green value: %d\n", value );
 
-    if ( value > 40 && value <= 128 ) {
-        printf( "Green goes right.\n" );
-        return 1;
-    } else if ( value > 128 && value < 215 ) {
-        printf( "Green goes left.\n" );
-        return -1;
-    }
-    
-    printf( "Green goes straight.\n" );
-    return 0;
+    return getDirection( value );
 }
