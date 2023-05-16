@@ -24,21 +24,25 @@
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 
-int getRedValue () {
-    unsigned char *parlcd_mem_base, *mem_base;
+unsigned char redValue = 0;
+unsigned char blueValue = 0;
+unsigned char greenValue = 0;
 
-    parlcd_mem_base = map_phys_address( PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE, 0 );
-    if ( parlcd_mem_base == NULL ) exit( 1 );
- 
-    mem_base = map_phys_address( SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0 );
-    if ( mem_base == NULL ) exit( 1 );
+void getValues ( unsigned char *mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
 
-    return ( r>>16 )&0xff;
+    redValue = ( r>>16 )&0xff;
+    blueValue = r&0xff;
+    greenValue = ( r>>8 )&0xff;
 }
 
-int getRedMovement () {
-    int value = getRedValue();
+int getRedValue ( unsigned char *mem_base ) {
+    getValues( mem_base );
+    return redValue;
+}
+
+int getRedMovement ( unsigned char *mem_base ) {
+    int value = getRedValue( mem_base );
     printf( "Red value: %d\n", value );
 
     if ( value > 40 && value <= 128 ) {
@@ -53,21 +57,13 @@ int getRedMovement () {
     return 0;
 }
 
-int getBlueValue () {
-    unsigned char *parlcd_mem_base, *mem_base;
-
-    parlcd_mem_base = map_phys_address( PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE, 0 );
-    if ( parlcd_mem_base == NULL ) exit( 1 );
- 
-    mem_base = map_phys_address( SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0 );
-    if ( mem_base == NULL ) exit( 1 );
-    int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
-
-    return r&0xff;
+int getBlueValue ( unsigned char *mem_base ) {
+    getValues( mem_base );
+    return blueValue;
 }
 
-int getBlueMovement () {
-    int value = getBlueValue;
+int getBlueMovement ( unsigned char *mem_base ) {
+    int value = getBlueValue( mem_base );
     printf( "Blue value: %d\n", value );
 
     if ( value > 40 && value <= 128 ) {
@@ -82,21 +78,13 @@ int getBlueMovement () {
     return 0;
 }
 
-int getGreenValue () {
-    unsigned char *parlcd_mem_base, *mem_base;
-
-    parlcd_mem_base = map_phys_address( PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE, 0 );
-    if ( parlcd_mem_base == NULL ) exit( 1 );
- 
-    mem_base = map_phys_address( SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0 );
-    if ( mem_base == NULL ) exit( 1 );
-    int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
-
-    return ( r>>8 )&0xff;
+int getGreenValue ( unsigned char *mem_base ) {
+    getValues( mem_base );
+    return blueValue;
 }
 
-int getGreenMovement () {
-    int value = getGreenValue;
+int getGreenMovement ( unsigned char *mem_base ) {
+    int value = getGreenValue( mem_base );
     printf( "Green value: %d\n", value );
 
     if ( value > 40 && value <= 128 ) {

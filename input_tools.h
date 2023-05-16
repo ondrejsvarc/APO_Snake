@@ -1,12 +1,14 @@
 
-int getRedValue ();
+void getValues ( unsigned char *mem_base );
 
-int getRedMovement ();
+int getRedValue ( unsigned char *mem_base );
 
-int getBlueValue ();
+int getRedMovement ( unsigned char *mem_base );
 
-int getBlueMovement ();
+int getBlueValue ( unsigned char *mem_base );
 
-int getGreenValue ();
+int getBlueMovement ( unsigned char *mem_base );
 
-int getGreenMovement ();
+int getGreenValue ( unsigned char *mem_base );
+
+int getGreenMovement ( unsigned char *mem_base );
