@@ -43,7 +43,8 @@ int getRedValue ( unsigned char *mem_base ) {
 
 int getRedMovement ( unsigned char *mem_base, int initialValue ) {
     unsigned int value = ( getRedValue( mem_base ) - initialValue ) % 80;
-    printf( "Red value: %d\n", value );
+    value = value < 0 ? ( value + 255 ) % 80 : value;
+    printf( "Red value: %u\n", value );
 
     if ( value > 16 && value <= 40 ) {
         printf( "Red goes right.\n" );
@@ -64,7 +65,8 @@ int getBlueValue ( unsigned char *mem_base ) {
 
 int getBlueMovement ( unsigned char *mem_base, int initialValue ) {
     unsigned int value = ( getBlueValue( mem_base ) - initialValue ) % 80;
-    printf( "Blue value: %d\n", value );
+    value = value < 0 ? ( value + 255 ) % 80 : value;
+    printf( "Blue value: %u\n", value );
 
     if ( value > 40 && value <= 128 ) {
         printf( "Blue goes right.\n" );
@@ -85,7 +87,8 @@ int getGreenValue ( unsigned char *mem_base ) {
 
 int getGreenMovement ( unsigned char *mem_base, int initialValue ) {
     unsigned int value = ( getGreenValue( mem_base ) - initialValue ) % 80;
-    printf( "Green value: %d\n", value );
+    value = value < 0 ? ( value + 255 ) % 80 : value;
+    printf( "Green value: %u\n", value );
 
     if ( value > 40 && value <= 128 ) {
         printf( "Green goes right.\n" );
