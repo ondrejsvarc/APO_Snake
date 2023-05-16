@@ -80,7 +80,7 @@ int getBlueMovement ( unsigned char *mem_base ) {
 
 int getGreenValue ( unsigned char *mem_base ) {
     getValues( mem_base );
-    return blueValue;
+    return greenValue;
 }
 
 int getGreenMovement ( unsigned char *mem_base ) {
