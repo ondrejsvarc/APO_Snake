@@ -78,12 +78,12 @@ int getBlueMovement ( unsigned char *mem_base, int initialValue ) {
     return 0;
 }
 
-int getGreenValue ( unsigned char *mem_base, int initialValue ) {
+int getGreenValue ( unsigned char *mem_base ) {
     getValues( mem_base );
     return greenValue;
 }
 
-int getGreenMovement ( unsigned char *mem_base ) {
+int getGreenMovement ( unsigned char *mem_base, int initialValue ) {
     unsigned int value = ( getGreenValue( mem_base ) - initialValue ) % 80;
     printf( "Green value: %u\n", value );
 
