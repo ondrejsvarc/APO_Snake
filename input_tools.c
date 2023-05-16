@@ -41,14 +41,14 @@ int getRedValue ( unsigned char *mem_base ) {
     return redValue;
 }
 
-int getRedMovement ( unsigned char *mem_base ) {
-    int value = getRedValue( mem_base );
+int getRedMovement ( unsigned char *mem_base, int initialValue ) {
+    unsigned int value = ( getRedValue( mem_base ) - initialValue ) % 80;
     printf( "Red value: %d\n", value );
 
-    if ( value > 40 && value <= 128 ) {
+    if ( value > 16 && value <= 40 ) {
         printf( "Red goes right.\n" );
         return 1;
-    } else if ( value > 128 && value < 215 ) {
+    } else if ( value > 40 && value < 64 ) {
         printf( "Red goes left.\n" );
         return -1;
     }
