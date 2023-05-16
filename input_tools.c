@@ -39,7 +39,7 @@ int getRedValue () {
 
 int getRedMovement () {
     int value = getRedValue();
-    printf( "Red value: %d/n", value );
+    printf( "Red value: %d\n", value );
 
     if ( value > 40 && value <= 128 ) {
         printf( "Red goes right.\n" );
@@ -68,7 +68,7 @@ int getBlueValue () {
 
 int getBlueMovement () {
     int value = getBlueValue;
-    printf( "Blue value: %d/n", value );
+    printf( "Blue value: %d\n", value );
 
     if ( value > 40 && value <= 128 ) {
         printf( "Blue goes right.\n" );
@@ -97,7 +97,7 @@ int getGreenValue () {
 
 int getGreenMovement () {
     int value = getGreenValue;
-    printf( "Green value: %d/n", value );
+    printf( "Green value: %d\n", value );
 
     if ( value > 40 && value <= 128 ) {
         printf( "Green goes right.\n" );
