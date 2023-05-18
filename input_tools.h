@@ -1,16 +1,16 @@
 
 void getValues ( unsigned char *mem_base );
 
-int getDirection ( int value );
+int getDirection ( int value, int previousValue );
 
 int getRedValue ( unsigned char *mem_base );
 
-int getRedMovement ( unsigned char *mem_base, int initialValue );
+int getRedMovement ( unsigned char *mem_base, int previousValue );
 
 int getBlueValue ( unsigned char *mem_base );
 
-int getBlueMovement ( unsigned char *mem_base, int initialValue );
+int getBlueMovement ( unsigned char *mem_base, int previousValue );
 
 int getGreenValue ( unsigned char *mem_base );
 
-int getGreenMovement ( unsigned char *mem_base, int initialValue );
+int getGreenMovement ( unsigned char *mem_base, int previousValue );
