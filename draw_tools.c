@@ -16,7 +16,7 @@ void drawTile ( int index, unsigned short color, unsigned short *fb ) {
 
     for ( int i = startX; i < maxX; ++ i ) {
         for ( int j = startY; j < maxY; ++j ) {
-            draw_pixel( i, j, color );
+            draw_pixel( i, j, color, fb );
         }
     }
 
