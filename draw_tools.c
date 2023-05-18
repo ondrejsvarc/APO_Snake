@@ -23,7 +23,7 @@ void drawTile ( int index, unsigned short color, unsigned short *fb ) {
 void drawFruit ( int index, unsigned short *fb ) {
     int x = index % 24;
     int y = ( index - x ) / 16;
-    int startX = x * 20 + 5 ;
+    int startX = x * 20 + 5;
     int maxX = startX + 10;
     int startY = y * 20 + 5;
     int maxY = startY + 10;
