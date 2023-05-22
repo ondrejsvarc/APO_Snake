@@ -12,28 +12,40 @@
 #include "draw_tools.h"
 #include "snake.h"
 #include "led_tools.h"
-#include "main.h"
 
 
 unsigned short *fb;
 
 int main(int argc, char *argv[]) {
+    unsigned char *mem_base;
+    unsigned char *parlcd_mem_base;
+    mem_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0);
+    if (mem_base == NULL) {
+        exit(1);
+    }
+
+    parlcd_mem_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE, 0);
+    if (parlcd_mem_base == NULL) {
+       exit(1);
+    }
+    parlcd_hx8357_init(parlcd_mem_base);
+
     FILE *menu_img_file = fopen("menu_img.ppm", 'rb');
     if (menu_img_file == NULL) {
         fprintf(stderr, "Error opening menu_img.ppm");
-        exit(-1);
+        exit(1);
     }
 
     unsigned char *menu_img_buffer = (unsigned char*) malloc(320*480*3);
     if (menu_img_buffer == NULL) {
         fprintf(stderr, "Couldn't allocate memory for menu image buffer!");
-        exit(-1);
+        exit(1);
     }
 
     fb = (unsigned short *)malloc(320*480*2);
     if (fb == NULL) {
         fprintf(stderr, "Couldn't allocate memory for frame buffer!");
-        exit(-1);
+        exit(1);
     }
     for (int i = 0; i < 4; i++) {
         fscanf(menu_img_file, "%s\n");
@@ -43,5 +55,23 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < 320*480; i++) {
         fb[i] = ((menu_img_buffer[i*3]/0xff)*0x1f)<<11 + ((menu_img_buffer[i*3+1]/0xff)*0x3f)<<5 + ((menu_img_buffer[i*3+2]/0xff)*0x1f);
     }
+
+    int c;
+    parlcd_write_cmd(parlcd_mem_base, 0x2c);
+    for (int i = 0; i < 320 ; i++) {
+        for (int j = 0; j < 480 ; j++) {
+            c = 0;
+            parlcd_write_data(parlcd_mem_base, c);
+        }
+    }
+
+    parlcd_write_cmd(parlcd_mem_base, 0x2c);
+    for (int i = 0; i < 320*480; i++) {
+        parlcd_write_data(parlcd_mem_base, fb[i]);
+    }
+
+    parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+
 
 }
