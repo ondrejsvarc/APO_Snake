@@ -16,7 +16,7 @@ typedef struct {
 } Snake;
 
 /*Function that takes snake struct and heading of the snake and moves the snake*/
-void move_snake(Snake *snake, short direction);
+void move_snake(Snake *snake, short direction, unsigned short *fb);
 
 void change_heading(Snake *snake, short heading_change);
 #endif
