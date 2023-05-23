@@ -27,7 +27,7 @@ int generateFruitPosition ( Snake snake1, Snake snake2 ) {
     return index;
 }
 
-int generateAiMove ( Snake snakeToMove, Snake snake2, int fruitIndex ) {
+int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     bool map[MAP_COLS][MAP_ROWS];
     int fruitX = fruitIndex % MAP_COLS;
     int fruitY = ( fruitIndex - fruitX ) / MAP_COLS;
@@ -86,7 +86,7 @@ int generateAiMove ( Snake snakeToMove, Snake snake2, int fruitIndex ) {
             moveGrades[i] = -1;
             continue;
         }
-        int newDistance = abs( posX - fruitX ) + abs( posY - fruitY )
+        int newDistance = abs( posX - fruitX ) + abs( posY - fruitY );
         if ( map[posX][posY] ) {
             moveGrades[i] = -1;
         } else if ( newDistance < distance ) {
