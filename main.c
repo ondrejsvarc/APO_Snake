@@ -12,6 +12,7 @@
 #include "draw_tools.h"
 #include "snake.h"
 #include "led_tools.h"
+#include "input_tools.h"
 
 
 unsigned short *fb;
@@ -54,6 +55,33 @@ int main(int argc, char *argv[]) {
         parlcd_write_data(parlcd_mem_base, fb[i]);
     }
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+    short menu_choice = 0;
+    int old_green_val = getGreenValue(mem_base);
+    short move;
+
+    while (1) {
+        move = getGreenMovement(mem_base, old_green_val);
+        old_green_val = getGreenValue(mem_base);
+
+        if (move != 0) {
+            drawMenuChoice(menu_choice, 0, fb);
+
+            if (move == -1) {
+                menu_choice = menu_choice == 0 ? 3 : menu_choice--;
+            } else if (move == 1) {
+                menu_choice = (menu_choice++)%4;
+            }
+
+            drawMenuChoice(menu_choice, COLOR_GREEN, fb);
+
+            for (int i = 0; i < 320*480; i++) {
+                parlcd_write_data(parlcd_mem_base, fb[i]);
+            }
+            parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+        }
+    }
 
 
 
