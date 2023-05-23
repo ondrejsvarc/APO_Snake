@@ -1,3 +1,7 @@
+#include <stdbool.h>
+
+
+bool pressGreen ( unsigned char *mem_base );
 
 void getValues ( unsigned char *mem_base );
 
