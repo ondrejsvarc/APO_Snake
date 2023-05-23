@@ -22,7 +22,7 @@
 
 bool values[32];
 
-void getValues ( int* r ) {
+void getLEDValues ( int* r ) {
     for ( int i = 0; i < 32; ++i ) {
         values[i] = ( r>>i )&0x01;
     }
@@ -36,7 +36,7 @@ void pasteValues ( int* r ) {
 
 void changeRedLengthLed ( unsigned short length, unsigned char* mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_LINE_o );
-    getValues( r );
+    getLEDValues( r );
 
     short ones = length % 10;
     short tens = ( length - ones ) / 10;
@@ -66,7 +66,7 @@ void changeRedLengthLed ( unsigned short length, unsigned char* mem_base ) {
 
 void changeBlueLengthLed ( unsigned short length, unsigned char* mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_LINE_o );
-    getValues( r );
+    getLEDValues( r );
 
     short ones = length % 10;
     short tens = ( length - ones ) / 10;
