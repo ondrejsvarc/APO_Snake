@@ -68,9 +68,9 @@ int main(int argc, char *argv[]) {
             drawMenuChoice(menu_choice, 0, fb);
 
             if (move == -1) {
-                menu_choice = menu_choice == 0 ? 3 : menu_choice--;
+                menu_choice = menu_choice == 0 ? 3 : menu_choice-1;
             } else if (move == 1) {
-                menu_choice = (menu_choice++)%4;
+                menu_choice = (menu_choice+1)%4;
             }
 
             drawMenuChoice(menu_choice, COLOR_GREEN, fb);
