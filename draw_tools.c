@@ -94,4 +94,6 @@ void drawMenu(unsigned char *parlcd_mem_base, unsigned short *fb) {
         parlcd_write_data(parlcd_mem_base, fb[i]);
     }
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+    free(random_string);
 }

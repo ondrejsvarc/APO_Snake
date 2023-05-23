@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     }
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
-
+    drawMenu(parlcd_mem_base, fb);
 
 
 
