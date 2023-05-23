@@ -13,6 +13,7 @@ typedef struct {
     short heading[2];
     short body[MAP_COLS*MAP_ROWS];
     unsigned short length;
+    int score;
 } Snake;
 
 /*Function that takes snake struct and heading of the snake and moves the snake*/
