@@ -53,8 +53,8 @@ int main(int argc, char *argv[]) {
     
     fread(menu_img_buffer, sizeof(unsigned char), 320*480*3, menu_img_file);
     for (int i = 0; i < 320*480; i++) {
-        fb[i] = ((menu_img_buffer[i*3]/0xff)*0x3f)<<11 + ((menu_img_buffer[i*3+1]/0xff)*0x7f)<<5 + ((menu_img_buffer[i*3+2]/0xff)*0x3f);
-    }
+        //fb[i] = (((((menu_img_buffer[i*3]/0xff)*0x3f)<<11)&0xf800) + ((((menu_img_buffer[i*3+1]/0xff)*0x7f)<<5)&0x7ff) + (((menu_img_buffer[i*3+2]/0xff)*0x3f)&0x1f));        
+        fb[i] = (((((menu_img_buffer[i*3]/0xff)*0x3f)>>1)<<12) + ((((menu_img_buffer[i*3+1]/0xff)*0x7f)>>1)<<6)) + (((menu_img_buffer[i*3+2]/0xff)*0x3f)>>1);    }
 
     int c;
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
