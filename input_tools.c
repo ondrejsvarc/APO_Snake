@@ -35,13 +35,13 @@ int getDirection ( int value, int previousValue ) {
     int compValue = value + 256;
     int compPreviousValue = previousValue + 256;
     if ( compValue > compPreviousValue ) {
-        printf( "Goes right.\n" );
+        //printf( "Goes right.\n" );
         return 1;
     } else if ( compValue < compPreviousValue ) {
-        printf( "Goes left.\n" );
+        //printf( "Goes left.\n" );
         return -1;
     }
-    printf( "Goes straight.\n" );
+    //printf( "Goes straight.\n" );
     return 0;
 }
 
@@ -52,7 +52,7 @@ int getRedValue ( unsigned char *mem_base ) {
 
 int getRedMovement ( unsigned char *mem_base, int previousValue ) {
     int value = getRedValue( mem_base );
-    printf( "Red value: %d\n", value );
+    //printf( "Red value: %d\n", value );
     return getDirection( value, previousValue );
 }
 
@@ -63,7 +63,7 @@ int getBlueValue ( unsigned char *mem_base ) {
 
 int getBlueMovement ( unsigned char *mem_base, int previousValue ) {
     int value = getBlueValue( mem_base );
-    printf( "Blue value: %d\n", value );
+    //printf( "Blue value: %d\n", value );
     return getDirection( value, previousValue );
 }
 
@@ -74,6 +74,6 @@ int getGreenValue ( unsigned char *mem_base ) {
 
 int getGreenMovement ( unsigned char *mem_base, int previousValue ) {
     int value = getGreenValue( mem_base );
-    printf( "Green value: %d\n", value );
+    //printf( "Green value: %d\n", value );
     return getDirection( value, previousValue );
 }
