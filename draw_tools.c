@@ -43,7 +43,7 @@ void drawFruit ( int index, unsigned short *fb ) {
     }
 }
 
-void drawMenuChoice ( int choice, unsigned short *fb ) {
+void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
     int lineStart = firstLine + choice * lineModifier;
     int lineEnd = lineStart + height;
     int firstLineEnd = lineStart + lineWidth;
@@ -53,12 +53,12 @@ void drawMenuChoice ( int choice, unsigned short *fb ) {
     for ( int i = lineStart; i < lineEnd; ++i ) {
         if ( i  < firstLineEnd || i > secondLineStart ) {
             for ( int j = firstColumn; j < lastColumn; ++j ) {
-                draw_pixel( i, j, 0xf800, fb );
+                draw_pixel( i, j, color, fb );
             }
         } else {
             for ( int j = 0; j < lineWidth; ++j ) {
-                draw_pixel( i, firstColumn + j, 0xf800, fb );
-                draw_pixel( i, firstColumn + width - lineWidth + j, 0xf800, fb );
+                draw_pixel( i, firstColumn + j, color, fb );
+                draw_pixel( i, firstColumn + width - lineWidth + j, color, fb );
             }
         }
     }
