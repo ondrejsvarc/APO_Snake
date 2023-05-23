@@ -18,6 +18,7 @@
 #include "mzapo_parlcd.h"
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
+#include "input_tools.h"
 
 unsigned char redValue = 0;
 unsigned char blueValue = 0;

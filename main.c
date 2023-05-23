@@ -61,6 +61,9 @@ int main(int argc, char *argv[]) {
     short move;
 
     while (1) {
+        if (pressGreen(mem_base)) {
+            break;
+        }
         move = getGreenMovement(mem_base, old_green_val);
         old_green_val = getGreenValue(mem_base);
 
@@ -68,8 +71,10 @@ int main(int argc, char *argv[]) {
             drawMenuChoice(menu_choice, 0, fb);
 
             if (move == -1) {
+                print("menu choice UP\n");
                 menu_choice = menu_choice == 0 ? 3 : menu_choice-1;
             } else if (move == 1) {
+                print("menu choice DOWN\n");
                 menu_choice = (menu_choice+1)%4;
             }
 

@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #define COLOR_GREEN 0x7e0
+#define COLOR_WHITE 0xffff
 
 
 void draw_pixel ( int x, int y, unsigned short color, unsigned short *fb );
