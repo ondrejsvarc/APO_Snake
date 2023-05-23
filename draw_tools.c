@@ -65,7 +65,7 @@ void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
     }
 }
 
-void drawMenu(unsigned char *parlcd_mem_base, unsigned short *fb) {
+void drawMenu(unsigned short *fb) {
     FILE *menu_img_file = fopen("/tmp/komanmi1/snake.ppm", "rb");
     if (menu_img_file == NULL) {
         fprintf(stderr, "Error opening snake.ppm");
@@ -89,11 +89,7 @@ void drawMenu(unsigned char *parlcd_mem_base, unsigned short *fb) {
         fb[i] = (((((menu_img_buffer[i*3]/0xff)*0x3f)>>1)<<12) + ((((menu_img_buffer[i*3+1]/0xff)*0x7f)>>1)<<6)) + (((menu_img_buffer[i*3+2]/0xff)*0x3f)>>1);        
     }
 
-
-    for (int i = 0; i < 320*480; i++) {
-        parlcd_write_data(parlcd_mem_base, fb[i]);
-    }
-    parlcd_write_cmd(parlcd_mem_base, 0x2c);
+    drawMenuChoice(0, 0x7e0, fb);
 
     free(random_string);
 }

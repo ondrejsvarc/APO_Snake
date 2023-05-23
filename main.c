@@ -48,7 +48,12 @@ int main(int argc, char *argv[]) {
     }
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
-    drawMenu(parlcd_mem_base, fb);
+    drawMenu(fb);
+
+    for (int i = 0; i < 320*480; i++) {
+        parlcd_write_data(parlcd_mem_base, fb[i]);
+    }
+    parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
 
 
