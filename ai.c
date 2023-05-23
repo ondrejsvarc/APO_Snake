@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "snake.h"
+#include "ai.h"
 
 int generateFruitPosition ( Snake snake1, Snake snake2 ) {
     int options = ( MAP_COLS * MAP_ROWS ) - snake1->length - snake2->length;
