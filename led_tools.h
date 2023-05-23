@@ -1,6 +1,6 @@
 
 
-void getValues ( int* r );
+void getLEDValues ( int* r );
 
 void pasteValues ( int* r );
 
