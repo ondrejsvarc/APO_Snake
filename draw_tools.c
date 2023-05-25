@@ -7,6 +7,96 @@ int lineWidth = 4;
 int width = 241;
 int height = 49;
 
+void draw_score ( int score1, int score2, unsigned short *fb ) {
+    // draw black boxes
+    for ( int i = 0; i < 40; ++i ) {
+        for ( int j = 0; i < 16; ++j ) {
+            draw_pixel( i, j, 0, fb );
+        }
+    }
+
+    for ( int i = 440; i < 480; ++i ) {
+        for ( int j = 0; i < 16; ++j ) {
+            draw_pixel( i, j, 0, fb );
+        }
+    }
+
+    // Get number strings
+    char num1[6], num2[6];
+    toString( num1, score1 );
+    toString( num2, score2 );
+
+    // Print score1
+    draw_char(0, 0, num1[0], 0xffff);
+    draw_char(8, 0, num1[1], 0xffff);
+    draw_char(16, 0, num1[2], 0xffff);
+    draw_char(24, 0, num1[3], 0xffff);
+    draw_char(32, 0, num1[4], 0xffff);
+
+    // Print score2
+    draw_char(440, 0, num2[0], 0xffff);
+    draw_char(448, 0, num2[1], 0xffff);
+    draw_char(456, 0, num2[2], 0xffff);
+    draw_char(464, 0, num2[3], 0xffff);
+    draw_char(472, 0, num2[4], 0xffff);
+
+}
+
+void draw_pixel_big(int x, int y, unsigned short color) {
+  int i,j;
+  for (i=0; i<scale; i++) {
+    for (j=0; j<scale; j++) {
+      draw_pixel(x+i, y+j, color);
+    }
+  }
+}
+ 
+int char_width(int ch) {
+  int width;
+  if (!fdes->width) {
+    width = fdes->maxwidth;
+  } else {
+    width = fdes->width[ch-fdes->firstchar];
+  }
+  return width;
+}
+ 
+void draw_char(int x, int y, char ch, unsigned short color) {
+  int w = char_width(ch);
+  const font_bits_t *ptr;
+  if ((ch >= fdes->firstchar) && (ch-fdes->firstchar < fdes->size)) {
+    if (fdes->offset) {
+      ptr = &fdes->bits[fdes->offset[ch-fdes->firstchar]];
+    } else {
+      int bw = (fdes->maxwidth+15)/16;
+      ptr = &fdes->bits[(ch-fdes->firstchar)*bw*fdes->height];
+    }
+    int i, j;
+    for (i=0; i<fdes->height; i++) {
+      font_bits_t val = *ptr;
+      for (j=0; j<w; j++) {
+        if ((val&0x8000)!=0) {
+          draw_pixel_big(x+scale*j, y+scale*i, color);
+        }
+        val<<=1;
+      }
+      ptr++;
+    }
+  }
+}
+
+void toString ( char str[], int num ) {
+    int i, rem, len = 6;
+
+    for (i = 0; i < len; i++)
+    {
+        rem = num % 10;
+        num = num / 10;
+        str[len - (i + 1)] = rem + '0';
+    }
+    str[len] = '\0';
+}
+
 void draw_pixel ( int x, int y, unsigned short color, unsigned short *fb ) {
   if (x>=0 && x<480 && y>=0 && y<320) {
     fb[x+480*y] = color;
