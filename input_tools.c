@@ -44,10 +44,10 @@ void getValues ( unsigned char *mem_base ) {
 int getDirection ( int value, int previousValue ) {
     int compValue = value + 256;
     int compPreviousValue = previousValue + 256;
-    if ( compValue > compPreviousValue ) {
+    if ( compValue > compPreviousValue + 3) {
         //printf( "Goes right.\n" );
         return 1;
-    } else if ( compValue < compPreviousValue ) {
+    } else if ( compValue < compPreviousValue - 3) {
         //printf( "Goes left.\n" );
         return -1;
     }
