@@ -27,7 +27,7 @@ unsigned char greenValue = 0;
 bool pressGreen ( unsigned char *mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
 
-    if ( ( r&0x7000000 ) != 0 ) {
+    if ( ( r&0x2000000 ) != 0 ) {
         return true;
     }
     return false;
