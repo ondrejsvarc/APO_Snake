@@ -89,7 +89,7 @@ void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb )
 }
 
 void toString ( char str[], int num ) {
-    int i, rem, len = 6;
+    int i, rem, len = 5;
 
     for (i = 0; i < len; i++)
     {
