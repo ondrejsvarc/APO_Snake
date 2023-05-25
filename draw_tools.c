@@ -13,13 +13,13 @@ int height = 49;
 void draw_score ( int score1, int score2, unsigned short *fb ) {
     // draw black boxes
     for ( int i = 0; i < 40; ++i ) {
-        for ( int j = 0; i < 16; ++j ) {
+        for ( int j = 0; j < 16; ++j ) {
             draw_pixel( i, j, 0, fb );
         }
     }
 
     for ( int i = 440; i < 480; ++i ) {
-        for ( int j = 0; i < 16; ++j ) {
+        for ( int j = 0; j < 16; ++j ) {
             draw_pixel( i, j, 0, fb );
         }
     }
