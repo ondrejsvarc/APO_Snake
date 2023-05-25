@@ -55,13 +55,13 @@ void draw_pixel_big(int x, int y, unsigned short color, unsigned short *fb ) {
 }
  
 int char_width(int ch) {
-  int width;
+  int charWidth;
   if (!fdes->width) {
-    width = fdes->maxwidth;
+    charWidth = fdes->maxwidth;
   } else {
-    width = fdes->width[ch-fdes->firstchar];
+    charWidth = fdes->width[ch-fdes->firstchar];
   }
-  return width;
+  return charWidth;
 }
  
 void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb ) {
