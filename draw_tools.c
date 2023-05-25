@@ -1,5 +1,8 @@
 #include "draw_tools.h"
 
+font_descriptor_t *fdes = &font_winFreeSystem14x16;
+int scale=1;
+
 int firstLine = 94;
 int firstColumn = 119;
 int lineModifier = 54;
