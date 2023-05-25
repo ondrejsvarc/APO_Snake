@@ -30,26 +30,26 @@ void draw_score ( int score1, int score2, unsigned short *fb ) {
     toString( num2, score2 );
 
     // Print score1
-    draw_char(0, 0, num1[0], 0xffff);
-    draw_char(8, 0, num1[1], 0xffff);
-    draw_char(16, 0, num1[2], 0xffff);
-    draw_char(24, 0, num1[3], 0xffff);
-    draw_char(32, 0, num1[4], 0xffff);
+    draw_char(0, 0, num1[0], 0xffff, fb);
+    draw_char(8, 0, num1[1], 0xffff, fb);
+    draw_char(16, 0, num1[2], 0xffff, fb);
+    draw_char(24, 0, num1[3], 0xffff, fb);
+    draw_char(32, 0, num1[4], 0xffff, fb);
 
     // Print score2
-    draw_char(440, 0, num2[0], 0xffff);
-    draw_char(448, 0, num2[1], 0xffff);
-    draw_char(456, 0, num2[2], 0xffff);
-    draw_char(464, 0, num2[3], 0xffff);
-    draw_char(472, 0, num2[4], 0xffff);
+    draw_char(440, 0, num2[0], 0xffff, fb);
+    draw_char(448, 0, num2[1], 0xffff, fb);
+    draw_char(456, 0, num2[2], 0xffff, fb);
+    draw_char(464, 0, num2[3], 0xffff, fb);
+    draw_char(472, 0, num2[4], 0xffff, fb);
 
 }
 
-void draw_pixel_big(int x, int y, unsigned short color) {
+void draw_pixel_big(int x, int y, unsigned short color, unsigned short *fb ) {
   int i,j;
   for (i=0; i<scale; i++) {
     for (j=0; j<scale; j++) {
-      draw_pixel(x+i, y+j, color);
+      draw_pixel(x+i, y+j, color, fb );
     }
   }
 }
@@ -64,7 +64,7 @@ int char_width(int ch) {
   return width;
 }
  
-void draw_char(int x, int y, char ch, unsigned short color) {
+void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb ) {
   int w = char_width(ch);
   const font_bits_t *ptr;
   if ((ch >= fdes->firstchar) && (ch-fdes->firstchar < fdes->size)) {
@@ -79,7 +79,7 @@ void draw_char(int x, int y, char ch, unsigned short color) {
       font_bits_t val = *ptr;
       for (j=0; j<w; j++) {
         if ((val&0x8000)!=0) {
-          draw_pixel_big(x+scale*j, y+scale*i, color);
+          draw_pixel_big(x+scale*j, y+scale*i, color, fb);
         }
         val<<=1;
       }
