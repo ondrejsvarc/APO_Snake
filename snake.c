@@ -6,6 +6,7 @@ void move_snake(Snake *snake, short direction, unsigned short *fb) {
     drawTile(snake->body[snake->length-1], 0, fb);
     for(int i = snake->length-1; i >= 0; i--) {
         if(i == 0) {
+            printf("--------head on: %d", snake->body[i]);
             snake->body[i] == snake->heading[0] + snake->heading[1]*24 + snake->body[i];
         } else {
             snake->body[i] = snake->body[i-1];
