@@ -215,6 +215,7 @@ void drawMenu(unsigned short *fb) {
     }
 
     drawMenuChoice(0, 0x7e0, fb);
+    drawDifficultyChoice( 0, COLOR_WHITE, fb);
 
     free(random_string);
 }
