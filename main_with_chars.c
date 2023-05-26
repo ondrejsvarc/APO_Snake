@@ -179,9 +179,9 @@ int main(int argc, char *argv[]) {
 
         if (move_blue != 0) {
             if (move_blue == -1) {
-                diff_choice = diff_choice == 0 ? 3 : diff_choice-1;
+                diff_choice = diff_choice == 0 ? 2 : diff_choice-1;
             } else if (move_blue == 1) {
-                diff_choice = (diff_choice+1)%4;
+                diff_choice = (diff_choice+1)%3;
             }
 
             drawDifficultyChoice(diff_choice, COLOR_GREEN, fb);
