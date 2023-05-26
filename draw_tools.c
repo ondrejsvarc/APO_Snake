@@ -123,7 +123,7 @@ void drawTile ( int index, unsigned short color, unsigned short *fb ) {
 
 void drawFruit ( int index, unsigned short *fb ) {
     int x = index % 24;
-    int y = ( index - x ) / 16;
+    int y = ( index - x ) / 24;
     int startX = x * 20 + 5;
     int maxX = startX + 10;
     int startY = y * 20 + 5;
@@ -131,7 +131,7 @@ void drawFruit ( int index, unsigned short *fb ) {
 
     for ( int i = startX; i < maxX; ++ i ) {
         for ( int j = startY; j < maxY; ++j ) {
-            draw_pixel( i, j, 0xf800, fb );
+            draw_pixel( i, j, COLOR_YELLOW, fb );
         }
     }
 }

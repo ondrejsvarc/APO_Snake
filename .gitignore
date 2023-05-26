@@ -9,3 +9,5 @@ main_with_chars.o
 mzapo_phys.o
 serialize_lock.o
 snake.o
+draw_tools.o
+main_with_chars.o

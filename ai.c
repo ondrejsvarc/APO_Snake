@@ -68,7 +68,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         map[x][y] = true;
     }
 
-    // 0 - left, 1 - up, 2 - left, 3- down
+    // 0 - left, 1 - up, 2 - right, 3- down
     int moveGrades[4];
 
     for ( int i = 0; i < 4; ++i ) {
@@ -81,7 +81,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
             break;
         case 1:
             posX = headX;
-            posY = headY + 1;
+            posY = headY - 1;
             break;
         case 2:
             posX = headX + 1;
@@ -89,7 +89,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
             break;
         case 3:
             posX = headX;
-            posY = headY - 1;
+            posY = headY + 1;
             break;
         default:
             break;
@@ -99,6 +99,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
             continue;
         }
         int newDistance = abs( posX - fruitX ) + abs( posY - fruitY );
+
         if ( map[posX][posY] ) {
             moveGrades[i] = -1;
         } else if ( newDistance < distance ) {
@@ -120,7 +121,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
             bestMove = i;
         }
     }
-
+    
     int heading;
     if ( headDirectionX == - 1 ) {
         heading = 0;
@@ -131,14 +132,11 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     } else {
         heading = 3;
     }
+    
 
-    // if ( bestMove == (heading + 2) % 4 || bestMove == (heading - 2) % 4) {
-    //     bestMove = secondBestMove;
-    // }
-
-    if ( bestMove == (heading + 1) % 4 || bestMove == (heading - 3) % 4 ) {
+    if ( bestMove == (heading + 1) % 4 ) {
         return 1;
-    } else if ( bestMove == (heading - 1) % 4 || bestMove == (heading + 3) % 4 ) {
+    } else if ( bestMove == (heading +3) % 4 ) {
         return -1;
     } else {
         return 0;

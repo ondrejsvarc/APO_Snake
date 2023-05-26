@@ -128,6 +128,7 @@ void start_menu() {
 
   short menu_choice = 0;
   short diff_choice = 0;
+  long int speed_choices[3] = {SPEED_EASY, SPEED_MEDIUM, SPEED_HARD};
   int old_green_val = getGreenValue(mem_base);
   int old_blue_val = getBlueValue(mem_base);
   short move_green;
@@ -145,7 +146,7 @@ void start_menu() {
       if (pressGreen(mem_base)) {
         switch (menu_choice) {
           case 0: 
-            start_zero_players_game(fb, mem_base, parlcd_mem_base);
+            start_zero_players_game(speed_choices[diff_choice], fb, mem_base, parlcd_mem_base);
             return;
           case 1:
             //sth
