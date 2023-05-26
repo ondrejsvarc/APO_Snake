@@ -29,11 +29,14 @@ void start_zero_players_game(unsigned short *fb, unsigned char *mem_base, unsign
     int dead_snakes = 0;
     short ai_move1 = 0;
     short ai_move2 = 0;
-    struct timespec loop_delay = {.tv_sec = 0, .tv_nsec = 100000000};
+    struct timespec loop_delay = {.tv_sec = 0, .tv_nsec = 1000000000};
 
     while(dead_snakes < 2) {
+        //printf("before gen move\n");
         ai_move1 = generateAiMove(&ai_snake1, &ai_snake2, 0);
         ai_move2 = generateAiMove(&ai_snake2, &ai_snake1, 0);
+        //printf("after gen move\n");
+        printf("ai1: %d , ai2: %d\n", ai_move1, ai_move2);
 
         move_snake(&ai_snake1, ai_move1, fb);
         move_snake(&ai_snake2, ai_move2, fb);
@@ -42,8 +45,10 @@ void start_zero_players_game(unsigned short *fb, unsigned char *mem_base, unsign
             parlcd_write_data(parlcd_mem_base, fb[i]);
         }
         parlcd_write_cmd(parlcd_mem_base, 0x2c);
-
+        
+        printf("before nanosleep\n");
         clock_nanosleep(1, 0, &loop_delay, NULL);
+        printf("after nanosleep\n");
 
     }
 

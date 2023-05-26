@@ -8,7 +8,8 @@
 int generateFruitPosition ( Snake *snake1, Snake *snake2 ) {
     int options = ( MAP_COLS * MAP_ROWS ) - snake1->length - snake2->length;
 
-    int index = srand( time( NULL ) ) % options;
+    srand(time(NULL));
+    int index = rand() % options;
 
     for ( int i = 0; i < snake1->length; ++i ) {
         if ( snake1->body[i] <= index ) {
