@@ -1,3 +1,11 @@
 
 .vscode/c_cpp_properties.json
 depend
+change_me
+depend
+draw_tools.o
+game.o
+main_with_chars.o
+mzapo_phys.o
+serialize_lock.o
+snake.o

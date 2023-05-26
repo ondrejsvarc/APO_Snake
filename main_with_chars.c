@@ -79,44 +79,46 @@ void draw_char(int x, int y, char ch, unsigned short color) {
 void start_menu();
 
 int main(int argc, char *argv[]) {
-    //fdes = &font_winFreeSystem14x16;
-    mem_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0);
-    if (mem_base == NULL) {
-        exit(1);
-    }
+  //fdes = &font_winFreeSystem14x16;
+  mem_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0);
+  if (mem_base == NULL) {
+      exit(1);
+  }
 
-    parlcd_mem_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE, 0);
-    if (parlcd_mem_base == NULL) {
-       exit(1);
-    }
-    parlcd_hx8357_init(parlcd_mem_base);
+  parlcd_mem_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE, 0);
+  if (parlcd_mem_base == NULL) {
+      exit(1);
+  }
+  parlcd_hx8357_init(parlcd_mem_base);
 
-    
+  
 
-    fb = (unsigned short *)malloc(320*480*sizeof(unsigned short));
-    if (fb == NULL) {
-        fprintf(stderr, "Couldn't allocate memory for frame buffer!");
-        exit(1);
-    }
+  fb = (unsigned short *)malloc(320*480*sizeof(unsigned short));
+  if (fb == NULL) {
+      fprintf(stderr, "Couldn't allocate memory for frame buffer!");
+      exit(1);
+  }
 
-    int c;
-    parlcd_write_cmd(parlcd_mem_base, 0x2c);
-    for (int i = 0; i < 320 ; i++) {
-        for (int j = 0; j < 480 ; j++) {
-            c = 0;
-            parlcd_write_data(parlcd_mem_base, c);
-        }
-    }
-    parlcd_write_cmd(parlcd_mem_base, 0x2c);
+  int c;
+  parlcd_write_cmd(parlcd_mem_base, 0x2c);
+  for (int i = 0; i < 320 ; i++) {
+      for (int j = 0; j < 480 ; j++) {
+          c = 0;
+          parlcd_write_data(parlcd_mem_base, c);
+      }
+  }
+  parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
-    changeLengthLed(10, 24, mem_base);
-    start_menu();
+  //changeLengthLed(10, 24, mem_base);
+  start_menu();
 
-    printf("Bye!\n");
-    return 0;
+  printf("Bye!\n");
+  return 0;
 }
 
 void start_menu() {
+  changeLengthLed(0, 0, mem_base);
+  // resetRGBLEDs(mem_base);
   drawMenu(fb);
 
   for (int i = 0; i < 320*480; i++) {

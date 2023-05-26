@@ -3,6 +3,7 @@
 #include "input_tools.h"
 #include "draw_tools.h"
 #include "ai.h"
+#include "rgb_tools.h"
 
 #include <time.h>
 

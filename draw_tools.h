@@ -5,6 +5,7 @@
 
 #define COLOR_GREEN 0x7e0
 #define COLOR_WHITE 0xffff
+#define COLOR_RED 0xf800
 
 
 void draw_score ( int score1, int score2, unsigned short *fb );
