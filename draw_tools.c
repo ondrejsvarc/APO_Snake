@@ -51,6 +51,7 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   draw_char(328, 100, 'S', COLOR_WHITE, fb, 3);
 
   // Print Scores
+  draw_score( score1, score2, fb );
 
   // Press Green Knob to Exit To Menu
   draw_char(80, 290, 'P', COLOR_WHITE, fb, 1);
