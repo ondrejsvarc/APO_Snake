@@ -36,7 +36,7 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   // Color player wins
   if ( score1 > score2 ) {
     // Red
-    draw_char(143, 100, 'R', COLOR_RED, fb, 3);
+    draw_char(141, 100, 'R', COLOR_RED, fb, 3);
     draw_char(170, 100, 'E', COLOR_RED, fb, 3);
     draw_char(195, 100, 'D', COLOR_RED, fb, 3);
 
@@ -51,8 +51,8 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   //  Wins
   draw_char(253, 100, 'W', COLOR_WHITE, fb, 3);
   draw_char(294, 100, 'I', COLOR_WHITE, fb, 3);
-  draw_char(301, 100, 'N', COLOR_WHITE, fb, 3);
-  draw_char(328, 100, 'S', COLOR_WHITE, fb, 3);
+  draw_char(303, 100, 'N', COLOR_WHITE, fb, 3);
+  draw_char(330, 100, 'S', COLOR_WHITE, fb, 3);
 
   // Print Scores
   draw_score( score1, score2, fb );
