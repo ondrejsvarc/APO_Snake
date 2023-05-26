@@ -41,15 +41,15 @@ void changeBlueRGBLED ( int status, unsigned char* mem_base) {
     switch ( status ) {
     case 0:
         // Alive
-        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff00;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o ) = 0xff00;
         break;
     case 1:
         // Fruit
-        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o ) = 0xff;
         break;
     case 2:
         // Dead
-        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff0000;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o ) = 0xff0000;
         break;
     default:
         break;
