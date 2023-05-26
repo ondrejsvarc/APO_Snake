@@ -19,15 +19,15 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   }
 
   // Game Over text
-  draw_char(88, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(122, 40, 'A', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(156, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(82, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(118, 40, 'A', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(154, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
   draw_char(190, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
 
   draw_char(258, 40, 'O', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(292, 40, 'V', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(326, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(360, 40, 'R', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(294, 40, 'V', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(330, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(366, 40, 'R', COLOR_BLUE + COLOR_RED, fb, 4);
 
   // Color player wins
   if ( score1 > score2 ) {
@@ -46,7 +46,7 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
 
   //  Wins
   draw_char(253, 100, 'W', COLOR_WHITE, fb, 3);
-  draw_char(278, 100, 'I', COLOR_WHITE, fb, 3);
+  draw_char(286, 100, 'I', COLOR_WHITE, fb, 3);
   draw_char(303, 100, 'N', COLOR_WHITE, fb, 3);
   draw_char(328, 100, 'S', COLOR_WHITE, fb, 3);
 
@@ -76,7 +76,7 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
 
   draw_char(280, 290, 'E', COLOR_WHITE, fb, 1);
   draw_char(290, 290, 'X', COLOR_WHITE, fb, 1);
-  draw_char(300, 290, 'I', COLOR_WHITE, fb, 1);
+  draw_char(303, 290, 'I', COLOR_WHITE, fb, 1);
   draw_char(310, 290, 'T', COLOR_WHITE, fb, 1);
 
   draw_char(330, 290, 'T', COLOR_WHITE, fb, 1);
