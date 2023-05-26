@@ -19,13 +19,13 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   }
 
   // Game Over text
-  draw_char(82, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(80, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
   draw_char(118, 40, 'A', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(154, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(190, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(153, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(192, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
 
   draw_char(258, 40, 'O', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(294, 40, 'V', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(296, 40, 'V', COLOR_BLUE + COLOR_RED, fb, 4);
   draw_char(330, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
   draw_char(366, 40, 'R', COLOR_BLUE + COLOR_RED, fb, 4);
 
@@ -39,15 +39,15 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   } else {
     // Blue
     draw_char(128, 100, 'B', COLOR_BLUE, fb, 3);
-    draw_char(153, 100, 'L', COLOR_BLUE, fb, 3);
-    draw_char(178, 100, 'U', COLOR_BLUE, fb, 3);
+    draw_char(154, 100, 'L', COLOR_BLUE, fb, 3);
+    draw_char(177, 100, 'U', COLOR_BLUE, fb, 3);
     draw_char(203, 100, 'E', COLOR_BLUE, fb, 3);
   }
 
   //  Wins
   draw_char(253, 100, 'W', COLOR_WHITE, fb, 3);
-  draw_char(286, 100, 'I', COLOR_WHITE, fb, 3);
-  draw_char(303, 100, 'N', COLOR_WHITE, fb, 3);
+  draw_char(294, 100, 'I', COLOR_WHITE, fb, 3);
+  draw_char(301, 100, 'N', COLOR_WHITE, fb, 3);
   draw_char(328, 100, 'S', COLOR_WHITE, fb, 3);
 
   // Print Scores
@@ -82,7 +82,7 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   draw_char(330, 290, 'T', COLOR_WHITE, fb, 1);
   draw_char(340, 290, 'O', COLOR_WHITE, fb, 1);
 
-  draw_char(360, 290, 'M', COLOR_WHITE, fb, 1);
+  draw_char(358, 290, 'M', COLOR_WHITE, fb, 1);
   draw_char(370, 290, 'E', COLOR_WHITE, fb, 1);
   draw_char(380, 290, 'N', COLOR_WHITE, fb, 1);
   draw_char(390, 290, 'U', COLOR_WHITE, fb, 1);
