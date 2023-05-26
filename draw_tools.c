@@ -1,14 +1,13 @@
 #include "draw_tools.h"
 
 font_descriptor_t *fdes = &font_winFreeSystem14x16;
-int scale=1;
 
-int firstLine = 94;
-int firstColumn = 119;
-int lineModifier = 54;
-int lineWidth = 4;
-int width = 241;
-int height = 49;
+int firstRow = 24;
+int firstColumn = 106;
+int squareModifier = 39;
+int squareSize = 7;
+int difficultyRow = 254;
+int difficultyColumn = 132;
 
 void draw_score ( int score1, int score2, unsigned short *fb ) {
     // draw black boxes
@@ -30,22 +29,22 @@ void draw_score ( int score1, int score2, unsigned short *fb ) {
     toString( num2, score2 );
 
     // Print score1
-    draw_char(0, 0, num1[0], 0xffff, fb);
-    draw_char(8, 0, num1[1], 0xffff, fb);
-    draw_char(16, 0, num1[2], 0xffff, fb);
-    draw_char(24, 0, num1[3], 0xffff, fb);
-    draw_char(32, 0, num1[4], 0xffff, fb);
+    draw_char(0, 0, num1[0], 0xffff, fb, 1);
+    draw_char(8, 0, num1[1], 0xffff, fb, 1);
+    draw_char(16, 0, num1[2], 0xffff, fb, 1);
+    draw_char(24, 0, num1[3], 0xffff, fb, 1);
+    draw_char(32, 0, num1[4], 0xffff, fb, 1);
 
     // Print score2
-    draw_char(440, 0, num2[0], 0xffff, fb);
-    draw_char(448, 0, num2[1], 0xffff, fb);
-    draw_char(456, 0, num2[2], 0xffff, fb);
-    draw_char(464, 0, num2[3], 0xffff, fb);
-    draw_char(472, 0, num2[4], 0xffff, fb);
+    draw_char(440, 0, num2[0], 0xffff, fb, 1);
+    draw_char(448, 0, num2[1], 0xffff, fb, 1);
+    draw_char(456, 0, num2[2], 0xffff, fb, 1);
+    draw_char(464, 0, num2[3], 0xffff, fb, 1);
+    draw_char(472, 0, num2[4], 0xffff, fb, 1);
 
 }
 
-void draw_pixel_big(int x, int y, unsigned short color, unsigned short *fb ) {
+void draw_pixel_big(int x, int y, unsigned short color, unsigned short *fb, int scale ) {
   int i,j;
   for (i=0; i<scale; i++) {
     for (j=0; j<scale; j++) {
@@ -64,7 +63,7 @@ int char_width(int ch) {
   return charWidth;
 }
  
-void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb ) {
+void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb, int scale ) {
   int w = char_width(ch);
   const font_bits_t *ptr;
   if ((ch >= fdes->firstchar) && (ch-fdes->firstchar < fdes->size)) {
@@ -79,7 +78,7 @@ void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb )
       font_bits_t val = *ptr;
       for (j=0; j<w; j++) {
         if ((val&0x8000)!=0) {
-          draw_pixel_big(x+scale*j, y+scale*i, color, fb);
+          draw_pixel_big(x+scale*j, y+scale*i, color, fb, scale);
         }
         val<<=1;
       }
@@ -138,24 +137,57 @@ void drawFruit ( int index, unsigned short *fb ) {
 }
 
 void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
-    int lineStart = firstLine + choice * lineModifier;
-    int lineEnd = lineStart + height;
-    int firstLineEnd = lineStart + lineWidth;
-    int secondLineStart = lineStart + height - lineWidth;
-    int lastColumn = firstColumn + width;
+    int rowStart = firstRow + choice * squareModifier;
+    int rowEnd = rowStart + squareSize;
+    int lastColumn = firstColumn + squareSize;
 
-    for ( int i = lineStart; i < lineEnd; ++i ) {
-        if ( i  < firstLineEnd || i > secondLineStart ) {
-            for ( int j = firstColumn; j < lastColumn; ++j ) {
-                draw_pixel( j, i, color, fb );
-            }
-        } else {
-            for ( int j = 0; j < lineWidth; ++j ) {
-                draw_pixel( firstColumn + j, i, color, fb );
-                draw_pixel( firstColumn + width - lineWidth + j, i, color, fb );
-            }
+    for ( int i = rowStart; i < rowEnd; ++i ) {
+        for ( int j = firstColumn; j < lastColumn; ++j ) {
+            draw_pixel( j, i, color, fb );
         }
     }
+}
+
+void drawDifficultyChoice ( int choice, unsigned short color, unsigned short *fb ) {
+    int row = difficultyRow;
+    int col = difficultyColumn;
+
+    // draw black box
+    for ( int i = 0; i < 144; ++i ) {
+        for ( int j = 0; j < 32; ++j ) {
+            draw_pixel( i, j, 0, fb );
+        }
+    }
+
+    // Draw choice
+    switch ( choice ) {
+    case 0:
+        // EASY
+        draw_char(254, 132, 'E', color, fb, 2);
+        draw_char(270, 132, 'A', color, fb, 2);
+        draw_char(286, 132, 'S', color, fb, 2);
+        draw_char(312, 132, 'Y', color, fb, 2);
+        break;
+    case 1:
+        // MEDIUM
+        draw_char(254, 132, 'M', color, fb, 2);
+        draw_char(270, 132, 'E', color, fb, 2);
+        draw_char(286, 132, 'D', color, fb, 2);
+        draw_char(312, 132, 'I', color, fb, 2);
+        draw_char(328, 132, 'U', color, fb, 2);
+        draw_char(344, 132, 'M', color, fb, 2);
+        break;
+    case 2:
+        // HARD
+        draw_char(254, 132, 'H', color, fb, 2);
+        draw_char(270, 132, 'A', color, fb, 2);
+        draw_char(286, 132, 'R', color, fb, 2);
+        draw_char(312, 132, 'D', color, fb, 2);
+        break;
+    default:
+        break;
+    }
+
 }
 
 void drawMenu(unsigned short *fb) {

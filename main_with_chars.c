@@ -132,9 +132,7 @@ int main(int argc, char *argv[]) {
 
     while (1) {
         move = getGreenMovement(mem_base, old_green_val);
-        if (move != 0) {
-          old_green_val = getGreenValue(mem_base);
-        }
+        old_green_val = getGreenValue(mem_base);
         if (pressGreen(mem_base)) {
           switch (menu_choice) {
             case 0: 
