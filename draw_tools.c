@@ -2,8 +2,8 @@
 
 font_descriptor_t *fdes = &font_winFreeSystem14x16;
 
-int firstRow = 24;
-int firstColumn = 106;
+int firstRow = 106;
+int firstColumn = 24;
 int squareModifier = 39;
 int squareSize = 7;
 int difficultyRow = 254;
@@ -143,7 +143,7 @@ void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
 
     for ( int i = rowStart; i < rowEnd; ++i ) {
         for ( int j = firstColumn; j < lastColumn; ++j ) {
-            draw_pixel( i, j, color, fb );
+            draw_pixel( j, i, color, fb );
         }
     }
 }
