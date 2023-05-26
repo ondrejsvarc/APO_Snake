@@ -153,8 +153,8 @@ void drawDifficultyChoice ( int choice, unsigned short color, unsigned short *fb
     int col = difficultyColumn;
 
     // draw black box
-    for ( int i = 0; i < 144; ++i ) {
-        for ( int j = 0; j < 32; ++j ) {
+    for ( int i = col; i < col + 144; ++i ) {
+        for ( int j = row; j < row + 32; ++j ) {
             draw_pixel( i, j, 0, fb );
         }
     }
