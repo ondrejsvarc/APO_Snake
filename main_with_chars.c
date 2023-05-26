@@ -14,9 +14,12 @@
 #include "led_tools.h"
 #include "input_tools.h"
 #include "font_types.h"
+#include "rgb_tools.h"
 
 
 unsigned short *fb;
+unsigned char *mem_base;
+unsigned char *parlcd_mem_base;
 
 /*
 font_descriptor_t *fdes;
@@ -73,12 +76,11 @@ void draw_char(int x, int y, char ch, unsigned short color) {
 
 */
 
+void start_menu();
 
 int main(int argc, char *argv[]) {
     struct timespec loop_delay = {.tv_sec = 0, .tv_nsec = 100000000};
     //fdes = &font_winFreeSystem14x16;
-    unsigned char *mem_base;
-    unsigned char *parlcd_mem_base;
     mem_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0);
     if (mem_base == NULL) {
         exit(1);
@@ -108,93 +110,86 @@ int main(int argc, char *argv[]) {
     }
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
-    drawMenu(fb);
-    /*
-    draw_char(350, 0, 'S', 0xffff);
-    draw_char(361, 0, 'C', 0xffff);
-    draw_char(372, 0, 'O', 0xffff);
-    draw_char(383, 0, 'R', 0xffff);
-    draw_char(394, 0, 'E', 0xffff);
-    draw_char(403, 0, ':', 0xffff);
-    */
-
-    draw_score(420, 69, fb);
-    //draw_char(0, 0, 'c', 0xffff, fb);
-
-    for (int i = 0; i < 320*480; i++) {
-        parlcd_write_data(parlcd_mem_base, fb[i]);
-    }
-    parlcd_write_cmd(parlcd_mem_base, 0x2c);
-
-    short menu_choice = 0;
-    short diff_choice = 0;
-    int old_green_val = getGreenValue(mem_base);
-    int old_blue_val = getBlueValue(mem_base);
-    short move_green;
-    short move_blue;
-
-    while (1) {
-        move_green = getGreenMovement(mem_base, old_green_val);
-        move_blue = getBlueMovement(mem_base, old_blue_val);
-        if (move_green != 0) {
-          old_green_val = getGreenValue(mem_base);
-        }
-        if (move_blue != 0) {
-          old_blue_val = getBlueValue(mem_base);
-        }
-        if (pressGreen(mem_base)) {
-          switch (menu_choice) {
-            case 0: 
-              // sth
-              // break;
-              return 0;
-            case 1:
-              //sth
-              break;
-            case 2:
-              //sth
-              break;
-            case 3:
-              return 0;
-          }
-        }
-
-        if (move_green != 0) {
-            drawMenuChoice(menu_choice, 0, fb);
-            
-            if (move_green == -1) {
-                menu_choice = menu_choice == 0 ? 3 : menu_choice-1;
-            } else if (move_green == 1) {
-                menu_choice = (menu_choice+1)%4;
-            }
-
-            drawMenuChoice(menu_choice, COLOR_GREEN, fb);
-
-            for (int i = 0; i < 320*480; i++) {
-                parlcd_write_data(parlcd_mem_base, fb[i]);
-            }
-            parlcd_write_cmd(parlcd_mem_base, 0x2c);
-
-        }
-
-        if (move_blue != 0) {
-            if (move_blue == -1) {
-                diff_choice = diff_choice == 0 ? 2 : diff_choice-1;
-            } else if (move_blue == 1) {
-                diff_choice = (diff_choice+1)%3;
-            }
-
-            drawDifficultyChoice(diff_choice, COLOR_GREEN, fb);
-
-            for (int i = 0; i < 320*480; i++) {
-                parlcd_write_data(parlcd_mem_base, fb[i]);
-            }
-            parlcd_write_cmd(parlcd_mem_base, 0x2c);
-
-        }
-       //clock_nanosleep(CLOCK_MONOTONIC, 0, &loop_delay, NULL); 
-    }
+    start_menu();
 
     printf("Bye!\n");
     return 0;
+}
+
+void start_menu() {
+  drawMenu(fb);
+
+  for (int i = 0; i < 320*480; i++) {
+      parlcd_write_data(parlcd_mem_base, fb[i]);
+  }
+  parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+  short menu_choice = 0;
+  short diff_choice = 0;
+  int old_green_val = getGreenValue(mem_base);
+  int old_blue_val = getBlueValue(mem_base);
+  short move_green;
+  short move_blue;
+
+  while (1) {
+      move_green = getGreenMovement(mem_base, old_green_val);
+      move_blue = getBlueMovement(mem_base, old_blue_val);
+      if (move_green != 0) {
+        old_green_val = getGreenValue(mem_base);
+      }
+      if (move_blue != 0) {
+        old_blue_val = getBlueValue(mem_base);
+      }
+      if (pressGreen(mem_base)) {
+        switch (menu_choice) {
+          case 0: 
+            // sth
+            // break;
+            return;
+          case 1:
+            //sth
+            break;
+          case 2:
+            //sth
+            break;
+          case 3:
+            return;
+        }
+      }
+
+      if (move_green != 0) {
+          drawMenuChoice(menu_choice, 0, fb);
+          
+          if (move_green == -1) {
+              menu_choice = menu_choice == 0 ? 3 : menu_choice-1;
+          } else if (move_green == 1) {
+              menu_choice = (menu_choice+1)%4;
+          }
+
+          drawMenuChoice(menu_choice, COLOR_GREEN, fb);
+
+          for (int i = 0; i < 320*480; i++) {
+              parlcd_write_data(parlcd_mem_base, fb[i]);
+          }
+          parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+      }
+
+      if (move_blue != 0) {
+          if (move_blue == -1) {
+              diff_choice = diff_choice == 0 ? 2 : diff_choice-1;
+          } else if (move_blue == 1) {
+              diff_choice = (diff_choice+1)%3;
+          }
+
+          drawDifficultyChoice(diff_choice, fb);
+
+          for (int i = 0; i < 320*480; i++) {
+              parlcd_write_data(parlcd_mem_base, fb[i]);
+          }
+          parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+      }
+  }
+  return;
 }

@@ -11,7 +11,7 @@ LDFLAGS += -static
 LDLIBS += -lrt -lpthread
 #LDLIBS += -lm
 
-SOURCES = main_with_chars.c mzapo_phys.c mzapo_parlcd.c serialize_lock.c input_tools.c draw_tools.c
+SOURCES = main_with_chars.c mzapo_phys.c mzapo_parlcd.c serialize_lock.c input_tools.c draw_tools.c rgb_tools.c
 SOURCES += font_prop14x16.c font_rom8x16.c
 TARGET_EXE = change_me
 TARGET_IP ?= 192.168.223.139
