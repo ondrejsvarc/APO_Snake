@@ -16,11 +16,12 @@ void move_snake(Snake *snake, short direction, unsigned short *fb) {
 }
 
 void change_heading(Snake *snake, short heading_change) {
+    short old_heading[2] = {snake->heading[0], snake->heading[1]};
     if (heading_change == -1) {
         snake->heading[0] = snake->heading[1];
-        snake->heading[1] = -1*snake->heading[0];
+        snake->heading[1] = -1*old_heading[0];
     } else if (heading_change == 1) {
         snake->heading[0] = -1*snake->heading[1];
-        snake->heading[1] = snake->heading[0];
+        snake->heading[1] = old_heading[0];
     }
 }
