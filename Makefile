@@ -1,5 +1,7 @@
-CC = zig cc -target arm-linux-gnueabihf
-CXX = zig cxx -target arm-linux-gnueabihf
+#CC = zig cc -target arm-linux-gnueabihf
+#CXX = zig cxx -target arm-linux-gnueabihf
+CC = arm-linux-gnueabihf-gcc
+CXX = arm-linux-gnueabihf-gcc
 
 CPPFLAGS = -I .
 CFLAGS =-g -std=gnu99 -O1 -Wall
@@ -9,10 +11,10 @@ LDFLAGS += -static
 LDLIBS += -lrt -lpthread
 #LDLIBS += -lm
 
-SOURCES = change_me.c mzapo_phys.c mzapo_parlcd.c serialize_lock.c
-#SOURCES += font_prop14x16.c font_rom8x16.c
+SOURCES = main_with_chars.c mzapo_phys.c mzapo_parlcd.c serialize_lock.c input_tools.c draw_tools.c
+SOURCES += font_prop14x16.c font_rom8x16.c
 TARGET_EXE = change_me
-TARGET_IP ?= 192.168.223.137
+TARGET_IP ?= 192.168.223.167
 ifeq ($(TARGET_IP),)
 ifneq ($(filter debug run,$(MAKECMDGOALS)),)
 $(warning The target IP address is not set)
@@ -23,10 +25,11 @@ endif
 TARGET_DIR ?= /tmp/$(shell whoami)
 TARGET_USER ?= root
 # for use from Eduroam network use TARGET_IP=localhost and enable next line
-SSH_OPTIONS=-o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -o "Port=2222"
-SSH_GDB_TUNNEL_REQUIRED=y
-SSH_OPTIONS=-i /home/el_dusto/.ssh/mzapo-root-key
-SSH_OPTIONS+=-o 'ProxyJump=komanmi1@postel.felk.cvut.cz'
+#SSH_OPTIONS=-o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -o "Port=2222"
+#SSH_GDB_TUNNEL_REQUIRED=y
+#SSH_OPTIONS=-i /home/el_dusto/.ssh/mzapo-root-key
+#SSH_OPTIONS+=-o 'ProxyJump=komanmi1@postel.felk.cvut.cz'
+SSH_OPTIONS=-i /opt/zynq/ssh-connect/mzapo-root-key
 
 OBJECTS += $(filter %.o,$(SOURCES:%.c=%.o))
 OBJECTS += $(filter %.o,$(SOURCES:%.cpp=%.o))
@@ -74,6 +77,7 @@ copy-executable: $(TARGET_EXE)
 	ssh $(SSH_OPTIONS) -t $(TARGET_USER)@$(TARGET_IP) killall gdbserver 1>/dev/null 2>/dev/null || true
 	ssh $(SSH_OPTIONS) $(TARGET_USER)@$(TARGET_IP) mkdir -p $(TARGET_DIR)
 	scp $(SSH_OPTIONS) $(TARGET_EXE) $(TARGET_USER)@$(TARGET_IP):$(TARGET_DIR)/$(TARGET_EXE)
+	scp $(SSH_OPTIONS) snake.ppm $(TARGET_USER)@$(TARGET_IP):$(TARGET_DIR)/snake.ppm
 
 run: copy-executable $(TARGET_EXE)
 	ssh $(SSH_OPTIONS) -t $(TARGET_USER)@$(TARGET_IP) $(TARGET_DIR)/$(TARGET_EXE)

@@ -18,7 +18,7 @@
 
 unsigned short *fb;
 
-
+/*
 font_descriptor_t *fdes;
 int scale=1;
  
@@ -71,11 +71,12 @@ void draw_char(int x, int y, char ch, unsigned short color) {
   }
 }
 
-
+*/
 
 
 int main(int argc, char *argv[]) {
-    fdes = &font_winFreeSystem14x16;
+    struct timespec loop_delay = {.tv_sec = 0, .tv_nsec = 100000000};
+    //fdes = &font_winFreeSystem14x16;
     unsigned char *mem_base;
     unsigned char *parlcd_mem_base;
     mem_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0);
@@ -108,13 +109,17 @@ int main(int argc, char *argv[]) {
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
     drawMenu(fb);
-
+    /*
     draw_char(350, 0, 'S', 0xffff);
     draw_char(361, 0, 'C', 0xffff);
     draw_char(372, 0, 'O', 0xffff);
     draw_char(383, 0, 'R', 0xffff);
     draw_char(394, 0, 'E', 0xffff);
     draw_char(403, 0, ':', 0xffff);
+    */
+
+    draw_score(420, 69, fb);
+    //draw_char(0, 0, 'c', 0xffff, fb);
 
     for (int i = 0; i < 320*480; i++) {
         parlcd_write_data(parlcd_mem_base, fb[i]);
@@ -127,12 +132,15 @@ int main(int argc, char *argv[]) {
 
     while (1) {
         move = getGreenMovement(mem_base, old_green_val);
-        old_green_val = getGreenValue(mem_base);
+        if (move != 0) {
+          old_green_val = getGreenValue(mem_base);
+        }
         if (pressGreen(mem_base)) {
           switch (menu_choice) {
             case 0: 
               // sth
-              break;
+              // break;
+              return 0;
             case 1:
               //sth
               break;
@@ -162,7 +170,7 @@ int main(int argc, char *argv[]) {
             parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
         }
-        
+       //clock_nanosleep(CLOCK_MONOTONIC, 0, &loop_delay, NULL); 
     }
 
     printf("Bye!\n");
