@@ -59,9 +59,9 @@ main_with_chars.o: main_with_chars.c \
  /usr/arm-linux-gnueabihf/include/bits/atomic_wide_counter.h \
  /usr/arm-linux-gnueabihf/include/bits/struct_mutex.h \
  /usr/arm-linux-gnueabihf/include/bits/struct_rwlock.h mzapo_regs.h \
- draw_tools.h snake.h \
+ draw_tools.h font_types.h snake.h \
  /usr/lib/gcc-cross/arm-linux-gnueabihf/12/include/stdbool.h led_tools.h \
- input_tools.h font_types.h
+ input_tools.h
 mzapo_phys.o: mzapo_phys.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/sys/types.h \
  /usr/arm-linux-gnueabihf/include/features.h \
@@ -322,7 +322,11 @@ draw_tools.o: draw_tools.c /usr/arm-linux-gnueabihf/include/stdc-predef.h \
  /usr/arm-linux-gnueabihf/include/bits/types/FILE.h \
  /usr/arm-linux-gnueabihf/include/bits/types/struct_FILE.h \
  /usr/arm-linux-gnueabihf/include/bits/stdio_lim.h \
- /usr/arm-linux-gnueabihf/include/bits/stdio.h
+ /usr/arm-linux-gnueabihf/include/bits/stdio.h font_types.h \
+ /usr/lib/gcc-cross/arm-linux-gnueabihf/12/include/stdint.h \
+ /usr/arm-linux-gnueabihf/include/stdint.h \
+ /usr/arm-linux-gnueabihf/include/bits/wchar.h \
+ /usr/arm-linux-gnueabihf/include/bits/stdint-uintn.h
 font_prop14x16.o: font_prop14x16.c \
  /usr/arm-linux-gnueabihf/include/stdc-predef.h font_types.h \
  /usr/lib/gcc-cross/arm-linux-gnueabihf/12/include/stdint.h \
@@ -361,3 +365,17 @@ font_rom8x16.o: font_rom8x16.c \
  /usr/arm-linux-gnueabihf/include/bits/wchar.h \
  /usr/arm-linux-gnueabihf/include/bits/stdint-intn.h \
  /usr/arm-linux-gnueabihf/include/bits/stdint-uintn.h
+-g
+-O1
+-Wall
+-w
+
+-M
+main_with_chars.c
+mzapo_phys.c
+mzapo_parlcd.c
+serialize_lock.c
+input_tools.c
+draw_tools.c
+font_prop14x16.c
+font_rom8x16.c
