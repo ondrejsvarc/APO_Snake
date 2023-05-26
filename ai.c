@@ -68,7 +68,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         map[x][y] = true;
     }
 
-    // 0 - left, 1 - up, 2 - left, 3- down
+    // 0 - left, 1 - up, 2 - right, 3- down
     int moveGrades[4];
 
     for ( int i = 0; i < 4; ++i ) {
