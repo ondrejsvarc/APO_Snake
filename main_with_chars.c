@@ -15,6 +15,7 @@
 #include "input_tools.h"
 #include "font_types.h"
 #include "rgb_tools.h"
+#include "game.h"
 
 
 unsigned short *fb;
@@ -79,7 +80,6 @@ void draw_char(int x, int y, char ch, unsigned short color) {
 void start_menu();
 
 int main(int argc, char *argv[]) {
-    struct timespec loop_delay = {.tv_sec = 0, .tv_nsec = 100000000};
     //fdes = &font_winFreeSystem14x16;
     mem_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0);
     if (mem_base == NULL) {
@@ -143,8 +143,7 @@ void start_menu() {
       if (pressGreen(mem_base)) {
         switch (menu_choice) {
           case 0: 
-            // sth
-            // break;
+            start_zero_players_game(fb, mem_base, parlcd_mem_base);
             return;
           case 1:
             //sth

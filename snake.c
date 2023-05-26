@@ -11,7 +11,7 @@ void move_snake(Snake *snake, short direction, unsigned short *fb) {
             snake->body[i] = snake->body[i-1];
         }  
     }
-    drawTile(snake->body[0], HEAD_COLOR, fb);
+    drawTile(snake->body[0], 0xffff, fb);
 }
 
 void change_heading(Snake *snake, short heading_change) {
