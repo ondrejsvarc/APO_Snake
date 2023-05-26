@@ -16,21 +16,21 @@ int generateFruitPosition ( Snake *snake1, Snake *snake2 ) {
     int k = 0;
 
     for ( int i = 0; i < mapSize; ++i ) {
-        bool ocupied = false;
+        bool occupied = false;
         for ( int j = 0; j < snake1->length; ++j ) {
             if ( i == snake1->body[j] ) {
-                ocupied = true;
+                occupied = true;
                 break;
             }
         }
         for ( int j = 0; j < snake2->length; ++j ) {
             if ( i == snake2->body[j] ) {
-                ocupied = true;
+                occupied = true;
                 break;
             }
         }
 
-        if ( !ocupied ) {
+        if ( !occupied ) {
             tiles[k] = i;
             k++;
         }
@@ -132,9 +132,9 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         heading = 3;
     }
 
-    if ( bestMove == (heading + 2) % 4 || bestMove == (heading - 2) % 4) {
-        bestMove = secondBestMove;
-    }
+    // if ( bestMove == (heading + 2) % 4 || bestMove == (heading - 2) % 4) {
+    //     bestMove = secondBestMove;
+    // }
 
     if ( bestMove == (heading + 1) % 4 || bestMove == (heading - 3) % 4 ) {
         return 1;
