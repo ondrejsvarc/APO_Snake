@@ -20,76 +20,45 @@
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 
-bool values[32];
+void changeLengthLed ( unsigned short length1, unsigned short length2, unsigned char* mem_base ) {
+    short ones1 = length1 % 10;
+    short tens1 = ( length1 - ones1 ) / 10;
+    short ones2 = length2 % 10;
+    short tens2 = ( length2 - ones2 ) / 10;
 
-void getLEDValues ( int* r ) {
-    for ( int i = 0; i < 32; ++i ) {
-        values[i] = ( r>>i )&0x01;
-    }
-}
-
-void pasteValues ( int* r ) {
-    for ( int i = 0; i < 32; ++i ) {
-        ( r>>i )&0x01 = values[i];
-    }
-}
-
-void changeRedLengthLed ( unsigned short length, unsigned char* mem_base ) {
-    int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_LINE_o );
-    getLEDValues( r );
-
-    short ones = length % 10;
-    short tens = ( length - ones ) / 10;
+    int finalValue = 0;
     
-    int iterator = 0;
-    for ( short i = 31; i > 22; --i ) {
-        if ( iterator < ones ) {
-            values[i] = true;
-        } else {
-            values[i] = false;
+    for ( int i = 0; i < ones2; ++i ) {
+        int power = 1;
+        for ( int j = 0; j < i; ++j ) {
+            power *= 2;
         }
-        iterator++;
+        finalValue += power;
     }
 
-    iterator = 0;
-    for ( short i = 16; i < 23; ++i ) {
-        if ( iterator < tens ) {
-            values[i] = true;
-        } else {
-            values[i] = false;
+    for ( int i = 15; i > 15 - tens2 && i > 8; --i ) {
+        int power = 1;
+        for ( int j = 0; j < i; ++j ) {
+            power *= 2;
         }
-        iterator++;
+        finalValue += power;
     }
 
-    pasteValues( r );
-}
-
-void changeBlueLengthLed ( unsigned short length, unsigned char* mem_base ) {
-    int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_LINE_o );
-    getLEDValues( r );
-
-    short ones = length % 10;
-    short tens = ( length - ones ) / 10;
-    
-    int iterator = 0;
-    for ( short i = 0; i < 9; ++i ) {
-        if ( iterator < ones ) {
-            values[i] = true;
-        } else {
-            values[i] = false;
+    for ( int i = 31; i > 31 - ones1; --i ) {
+        int power = 1;
+        for ( int j = 0; j < i; ++j ) {
+            power *= 2;
         }
-        iterator++;
+        finalValue += power;
     }
 
-    iterator = 0;
-    for ( short i = 15; i > 8; --i ) {
-        if ( iterator < tens ) {
-            values[i] = true;
-        } else {
-            values[i] = false;
+    for ( int i = 16; i < 16 + tens1 && i < 23; ++i ) {
+        int power = 1;
+        for ( int j = 0; j < i; ++j ) {
+            power *= 2;
         }
-        iterator++;
+        finalValue += power;
     }
 
-    pasteValues( r );
+    *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_LINE_o ) = finalValue;
 }
