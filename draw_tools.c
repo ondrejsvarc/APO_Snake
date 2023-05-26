@@ -4,7 +4,7 @@ font_descriptor_t *fdes = &font_winFreeSystem14x16;
 
 int firstRow = 106;
 int firstColumn = 24;
-int squareModifier = 39;
+int squareModifier = 45;
 int squareSize = 7;
 int difficultyRow = 254;
 int difficultyColumn = 132;
