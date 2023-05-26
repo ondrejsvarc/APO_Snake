@@ -167,22 +167,22 @@ void drawDifficultyChoice ( int choice, unsigned short *fb ) {
         draw_char(254, 132, 'E', color, fb, 2);
         draw_char(272, 132, 'A', color, fb, 2);
         draw_char(290, 132, 'S', color, fb, 2);
-        draw_char(318, 132, 'Y', color, fb, 2);
+        draw_char(316, 132, 'Y', color, fb, 2);
         break;
     case 1:
         // MEDIUM
         draw_char(254, 132, 'M', color, fb, 2);
-        draw_char(272, 132, 'E', color, fb, 2);
-        draw_char(290, 132, 'D', color, fb, 2);
-        draw_char(318, 132, 'I', color, fb, 2);
-        draw_char(334, 132, 'U', color, fb, 2);
-        draw_char(352, 132, 'M', color, fb, 2);
+        draw_char(273, 132, 'E', color, fb, 2);
+        draw_char(291, 132, 'D', color, fb, 2);
+        draw_char(317, 132, 'I', color, fb, 2);
+        draw_char(332, 132, 'U', color, fb, 2);
+        draw_char(350, 132, 'M', color, fb, 2);
         break;
     case 2:
         // HARD
         draw_char(254, 132, 'H', color, fb, 2);
-        draw_char(272, 132, 'A', color, fb, 2);
-        draw_char(290, 132, 'R', color, fb, 2);
+        draw_char(274, 132, 'A', color, fb, 2);
+        draw_char(292, 132, 'R', color, fb, 2);
         draw_char(318, 132, 'D', color, fb, 2);
         break;
     default:
