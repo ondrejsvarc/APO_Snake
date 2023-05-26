@@ -79,7 +79,6 @@ void draw_char(int x, int y, char ch, unsigned short color) {
 void start_menu();
 
 int main(int argc, char *argv[]) {
-  //fdes = &font_winFreeSystem14x16;
   mem_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE, 0);
   if (mem_base == NULL) {
       exit(1);
@@ -118,7 +117,7 @@ int main(int argc, char *argv[]) {
 
 void start_menu() {
   changeLengthLed(0, 0, mem_base);
-  // resetRGBLEDs(mem_base);
+  reset_RGB_LED(mem_base);
   drawMenu(fb);
 
   for (int i = 0; i < 320*480; i++) {
@@ -147,16 +146,44 @@ void start_menu() {
         switch (menu_choice) {
           case 0: 
             start_zero_players_game(speed_choices[diff_choice], fb, mem_base, parlcd_mem_base);
-            return;
+            break;
           case 1:
-            //sth
+            start_one_player_game(speed_choices[diff_choice], fb, mem_base, parlcd_mem_base);
             break;
           case 2:
-            //sth
+            start_two_players_game(speed_choices[diff_choice], fb, mem_base, parlcd_mem_base);
             break;
           case 3:
+            paint_it_black(fb);
+            for (int i = 0; i < 320*480; i++) {
+              parlcd_write_data(parlcd_mem_base, fb[i]);
+            }
+            parlcd_write_cmd(parlcd_mem_base, 0x2c);
+            changeLengthLed(0, 0, mem_base);
+            reset_RGB_LED(mem_base);
             return;
         }
+        changeLengthLed(0, 0, mem_base);
+        reset_RGB_LED(mem_base);
+        drawMenu(fb);
+
+        menu_choice = 0;
+        diff_choice = 0;
+
+        old_green_val = getGreenValue(mem_base);
+        old_blue_val = getBlueValue(mem_base);
+
+        drawMenuChoice(menu_choice, COLOR_GREEN, fb);
+        drawDifficultyChoice(diff_choice, fb);
+
+        for (int i = 0; i < 320*480; i++) {
+          parlcd_write_data(parlcd_mem_base, fb[i]);
+        }
+        parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+        struct timespec loop_delay = {.tv_sec = 1, .tv_nsec = 0};
+        clock_nanosleep(1, 0, &loop_delay, NULL);
+
       }
 
       if (move_green != 0) {
