@@ -20,13 +20,15 @@ void changeRedRGBLED ( int status, unsigned char* mem_base) {
     switch ( status ) {
     case 0:
         // Alive
-        r = 0x7e0;
+        r = 0xff00;
         break;
     case 1:
         // Fruit
+        r = 0xff;
         break;
     case 2:
         // Dead
+        r = 0xff0000;
         break;
     default:
         break;
@@ -39,13 +41,15 @@ void changeBlueRGBLED ( int status, unsigned char* mem_base) {
     switch ( status ) {
     case 0:
         // Alive
-        r = 0x7e0;
+        r = 0xff00;
         break;
     case 1:
         // Fruit
+        r = 0xff;
         break;
     case 2:
         // Dead
+        r = 0xff0000;
         break;
     default:
         break;
