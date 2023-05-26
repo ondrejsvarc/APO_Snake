@@ -19,49 +19,72 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   }
 
   // Game Over text
-  draw_char(96, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(128, 40, 'A', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(160, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(192, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(88, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(122, 40, 'A', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(156, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(190, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
 
-  draw_char(256, 40, 'O', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(288, 40, 'V', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(320, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(352, 40, 'R', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(258, 40, 'O', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(292, 40, 'V', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(326, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(360, 40, 'R', COLOR_BLUE + COLOR_RED, fb, 4);
+
+  // Color player wins
+  if ( score1 > score2 ) {
+    // Red
+    draw_char(145, 100, 'R', COLOR_RED, fb, 3);
+    draw_char(170, 100, 'E', COLOR_RED, fb, 3);
+    draw_char(195, 100, 'D', COLOR_RED, fb, 3);
+
+  } else {
+    // Blue
+    draw_char(128, 100, 'B', COLOR_BLUE, fb, 3);
+    draw_char(153, 100, 'L', COLOR_BLUE, fb, 3);
+    draw_char(178, 100, 'U', COLOR_BLUE, fb, 3);
+    draw_char(203, 100, 'E', COLOR_BLUE, fb, 3);
+  }
+
+  //  Wins
+  draw_char(253, 100, 'W', COLOR_WHITE, fb, 3);
+  draw_char(278, 100, 'I', COLOR_WHITE, fb, 3);
+  draw_char(303, 100, 'N', COLOR_WHITE, fb, 3);
+  draw_char(328, 100, 'S', COLOR_WHITE, fb, 3);
+
+  // Print Scores
 
   // Press Green Knob to Exit To Menu
-  draw_char(112, 290, 'P', COLOR_WHITE, fb, 1);
-  draw_char(120, 290, 'R', COLOR_WHITE, fb, 1);
-  draw_char(128, 290, 'E', COLOR_WHITE, fb, 1);
-  draw_char(136, 290, 'S', COLOR_WHITE, fb, 1);
-  draw_char(144, 290, 'S', COLOR_WHITE, fb, 1);
+  draw_char(80, 290, 'P', COLOR_WHITE, fb, 1);
+  draw_char(90, 290, 'R', COLOR_WHITE, fb, 1);
+  draw_char(100, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(110, 290, 'S', COLOR_WHITE, fb, 1);
+  draw_char(120, 290, 'S', COLOR_WHITE, fb, 1);
   
-  draw_char(160, 290, 'G', COLOR_WHITE, fb, 1);
-  draw_char(168, 290, 'R', COLOR_WHITE, fb, 1);
-  draw_char(176, 290, 'E', COLOR_WHITE, fb, 1);
-  draw_char(184, 290, 'E', COLOR_WHITE, fb, 1);
-  draw_char(192, 290, 'N', COLOR_WHITE, fb, 1);
+  draw_char(140, 290, 'G', COLOR_WHITE, fb, 1);
+  draw_char(150, 290, 'R', COLOR_WHITE, fb, 1);
+  draw_char(160, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(170, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(180, 290, 'N', COLOR_WHITE, fb, 1);
 
-  draw_char(208, 290, 'K', COLOR_WHITE, fb, 1);
-  draw_char(216, 290, 'N', COLOR_WHITE, fb, 1);
-  draw_char(224, 290, 'O', COLOR_WHITE, fb, 1);
-  draw_char(232, 290, 'B', COLOR_WHITE, fb, 1);
+  draw_char(200, 290, 'K', COLOR_WHITE, fb, 1);
+  draw_char(210, 290, 'N', COLOR_WHITE, fb, 1);
+  draw_char(220, 290, 'O', COLOR_WHITE, fb, 1);
+  draw_char(230, 290, 'B', COLOR_WHITE, fb, 1);
 
-  draw_char(248, 290, 'T', COLOR_WHITE, fb, 1);
-  draw_char(256, 290, 'O', COLOR_WHITE, fb, 1);
+  draw_char(250, 290, 'T', COLOR_WHITE, fb, 1);
+  draw_char(260, 290, 'O', COLOR_WHITE, fb, 1);
 
-  draw_char(264, 290, 'E', COLOR_WHITE, fb, 1);
-  draw_char(272, 290, 'X', COLOR_WHITE, fb, 1);
-  draw_char(280, 290, 'I', COLOR_WHITE, fb, 1);
-  draw_char(288, 290, 'T', COLOR_WHITE, fb, 1);
+  draw_char(280, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(290, 290, 'X', COLOR_WHITE, fb, 1);
+  draw_char(300, 290, 'I', COLOR_WHITE, fb, 1);
+  draw_char(310, 290, 'T', COLOR_WHITE, fb, 1);
 
-  draw_char(304, 290, 'T', COLOR_WHITE, fb, 1);
-  draw_char(312, 290, 'O', COLOR_WHITE, fb, 1);
+  draw_char(330, 290, 'T', COLOR_WHITE, fb, 1);
+  draw_char(340, 290, 'O', COLOR_WHITE, fb, 1);
 
-  draw_char(320, 290, 'M', COLOR_WHITE, fb, 1);
-  draw_char(328, 290, 'E', COLOR_WHITE, fb, 1);
-  draw_char(336, 290, 'N', COLOR_WHITE, fb, 1);
-  draw_char(344, 290, 'U', COLOR_WHITE, fb, 1);
+  draw_char(360, 290, 'M', COLOR_WHITE, fb, 1);
+  draw_char(370, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(380, 290, 'N', COLOR_WHITE, fb, 1);
+  draw_char(390, 290, 'U', COLOR_WHITE, fb, 1);
 
 }
 
