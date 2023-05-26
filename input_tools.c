@@ -24,6 +24,15 @@ unsigned char redValue = 0;
 unsigned char blueValue = 0;
 unsigned char greenValue = 0;
 
+bool abort_game ( unsigned char *mem_base ) {
+    int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
+
+    if ( ( r&0x1000000 ) != 0 && ( r&0x4000000 ) != 0 ) {
+        return true;
+    }
+    return false;
+}
+
 bool pressGreen ( unsigned char *mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
 

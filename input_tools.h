@@ -1,5 +1,6 @@
 #include <stdbool.h>
 
+bool abort_game ( unsigned char *mem_base );
 
 bool pressGreen ( unsigned char *mem_base );
 
