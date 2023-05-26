@@ -127,13 +127,20 @@ int main(int argc, char *argv[]) {
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
     short menu_choice = 0;
+    short diff_choice = 0;
     int old_green_val = getGreenValue(mem_base);
-    short move;
+    int old_blue_val = getBlueValue(mem_base);
+    short move_green;
+    short move_blue;
 
     while (1) {
-        move = getGreenMovement(mem_base, old_green_val);
-        if (move != 0) {
+        move_green = getGreenMovement(mem_base, old_green_val);
+        move_blue = getBlueMovement(mem_base, old_blue_val);
+        if (move_green != 0) {
           old_green_val = getGreenValue(mem_base);
+        }
+        if (move_blue != 0) {
+          old_blue_val = getBlueValue(mem_base);
         }
         if (pressGreen(mem_base)) {
           switch (menu_choice) {
@@ -152,18 +159,32 @@ int main(int argc, char *argv[]) {
           }
         }
 
-        if (move != 0) {
+        if (move_green != 0) {
             drawMenuChoice(menu_choice, 0, fb);
             
-
-
-            if (move == -1) {
+            if (move_green == -1) {
                 menu_choice = menu_choice == 0 ? 3 : menu_choice-1;
-            } else if (move == 1) {
+            } else if (move_green == 1) {
                 menu_choice = (menu_choice+1)%4;
             }
 
             drawMenuChoice(menu_choice, COLOR_GREEN, fb);
+
+            for (int i = 0; i < 320*480; i++) {
+                parlcd_write_data(parlcd_mem_base, fb[i]);
+            }
+            parlcd_write_cmd(parlcd_mem_base, 0x2c);
+
+        }
+
+        if (move_blue != 0) {
+            if (move_blue == -1) {
+                diff_choice = diff_choice == 0 ? 3 : diff_choice-1;
+            } else if (move_blue == 1) {
+                diff_choice = (diff_choice+1)%4;
+            }
+
+            drawDifficultyChoice(diff_choice, COLOR_GREEN, fb);
 
             for (int i = 0; i < 320*480; i++) {
                 parlcd_write_data(parlcd_mem_base, fb[i]);
