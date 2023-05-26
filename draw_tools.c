@@ -10,13 +10,17 @@ int squareSize = 7;
 int difficultyRow = 254;
 int difficultyColumn = 132;
 
-void draw_game_over ( int score1, int score2, unsigned short *fb ) {
-  // Paint it black
+void paint_it_black ( unsigned short *fb ) {
   for ( int i = 0; i < 480; ++i ) {
     for ( int j = 0; j < 320; ++j ) {
       draw_pixel( i, j, COLOR_BLACK, fb );
     }
   }
+}
+
+void draw_game_over ( int score1, int score2, unsigned short *fb ) {
+  // Paint it black
+  paint_it_black( fb );
 
   // Game Over text
   draw_char(80, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);

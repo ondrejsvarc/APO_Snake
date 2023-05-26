@@ -10,7 +10,7 @@
 #define COLOR_BLACK 0x0
 #define COLOR_YELLOW 0xffe0
 
-
+void paint_it_black ( unsigned short *fb );
 void draw_game_over ( int score1, int score2, unsigned short *fb );
 void draw_score ( int score1, int score2, unsigned short *fb );
 void draw_pixel ( int x, int y, unsigned short color, unsigned short *fb );
