@@ -15,20 +15,20 @@
 #include "mzapo_regs.h"
 
 void changeRedRGBLED ( int status, unsigned char* mem_base) {
-    int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o );
+    //int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o );
 
     switch ( status ) {
     case 0:
         // Alive
-        r = 0xff00;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff00;
         break;
     case 1:
         // Fruit
-        r = 0xff;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff;
         break;
     case 2:
         // Dead
-        r = 0xff0000;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff0000;
         break;
     default:
         break;
@@ -36,20 +36,20 @@ void changeRedRGBLED ( int status, unsigned char* mem_base) {
 }
 
 void changeBlueRGBLED ( int status, unsigned char* mem_base) {
-    int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o );
+    //int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o );
 
     switch ( status ) {
     case 0:
         // Alive
-        r = 0xff00;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff00;
         break;
     case 1:
         // Fruit
-        r = 0xff;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff;
         break;
     case 2:
         // Dead
-        r = 0xff0000;
+        *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0xff0000;
         break;
     default:
         break;
