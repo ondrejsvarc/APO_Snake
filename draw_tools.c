@@ -1,5 +1,6 @@
 #include "draw_tools.h"
 
+
 font_descriptor_t *fdes = &font_winFreeSystem14x16;
 
 int firstRow = 106;
@@ -8,6 +9,61 @@ int squareModifier = 46;
 int squareSize = 7;
 int difficultyRow = 254;
 int difficultyColumn = 132;
+
+void draw_game_over ( int score1, int score2, unsigned short *fb ) {
+  // Paint it black
+  for ( int i = 0; i < 480; ++i ) {
+    for ( int j = 0; j < 320; ++j ) {
+      draw_pixel( i, j, COLOR_BLACK, fb );
+    }
+  }
+
+  // Game Over text
+  draw_char(96, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(128, 40, 'A', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(160, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(192, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
+
+  draw_char(256, 40, 'O', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(288, 40, 'V', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(320, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(352, 40, 'R', COLOR_BLUE + COLOR_RED, fb, 4);
+
+  // Press Green Knob to Exit To Menu
+  draw_char(112, 290, 'P', COLOR_WHITE, fb, 1);
+  draw_char(120, 290, 'R', COLOR_WHITE, fb, 1);
+  draw_char(128, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(136, 290, 'S', COLOR_WHITE, fb, 1);
+  draw_char(144, 290, 'S', COLOR_WHITE, fb, 1);
+  
+  draw_char(160, 290, 'G', COLOR_WHITE, fb, 1);
+  draw_char(168, 290, 'R', COLOR_WHITE, fb, 1);
+  draw_char(176, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(184, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(192, 290, 'N', COLOR_WHITE, fb, 1);
+
+  draw_char(208, 290, 'K', COLOR_WHITE, fb, 1);
+  draw_char(216, 290, 'N', COLOR_WHITE, fb, 1);
+  draw_char(224, 290, 'O', COLOR_WHITE, fb, 1);
+  draw_char(232, 290, 'B', COLOR_WHITE, fb, 1);
+
+  draw_char(248, 290, 'T', COLOR_WHITE, fb, 1);
+  draw_char(256, 290, 'O', COLOR_WHITE, fb, 1);
+
+  draw_char(264, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(272, 290, 'X', COLOR_WHITE, fb, 1);
+  draw_char(280, 290, 'I', COLOR_WHITE, fb, 1);
+  draw_char(288, 290, 'T', COLOR_WHITE, fb, 1);
+
+  draw_char(304, 290, 'T', COLOR_WHITE, fb, 1);
+  draw_char(312, 290, 'O', COLOR_WHITE, fb, 1);
+
+  draw_char(320, 290, 'M', COLOR_WHITE, fb, 1);
+  draw_char(328, 290, 'E', COLOR_WHITE, fb, 1);
+  draw_char(336, 290, 'N', COLOR_WHITE, fb, 1);
+  draw_char(344, 290, 'U', COLOR_WHITE, fb, 1);
+
+}
 
 void draw_score ( int score1, int score2, unsigned short *fb ) {
     // draw black boxes
