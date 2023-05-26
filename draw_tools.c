@@ -154,7 +154,7 @@ void drawDifficultyChoice ( int choice, unsigned short *fb ) {
     unsigned short color = COLOR_WHITE;
 
     // draw black box
-    for ( int i = row; i < row + 156; ++i ) {
+    for ( int i = row; i < row + 200; ++i ) {
         for ( int j = col; j < col + 32; ++j ) {
             draw_pixel( i, j, 0, fb );
         }
@@ -164,26 +164,26 @@ void drawDifficultyChoice ( int choice, unsigned short *fb ) {
     switch ( choice ) {
     case 0:
         // EASY
-        draw_char(254, 132, 'E', color, fb, 2);
-        draw_char(272, 132, 'A', color, fb, 2);
-        draw_char(290, 132, 'S', color, fb, 2);
-        draw_char(314, 132, 'Y', color, fb, 2);
+        draw_char(270, 132, 'E', color, fb, 2);
+        draw_char(291, 132, 'A', color, fb, 2);
+        draw_char(309, 132, 'S', color, fb, 2);
+        draw_char(333, 132, 'Y', color, fb, 2);
         break;
     case 1:
         // MEDIUM
-        draw_char(254, 132, 'M', color, fb, 2);
-        draw_char(275, 132, 'E', color, fb, 2);
-        draw_char(293, 132, 'D', color, fb, 2);
-        draw_char(317, 132, 'I', color, fb, 2);
-        draw_char(330, 132, 'U', color, fb, 2);
-        draw_char(348, 132, 'M', color, fb, 2);
+        draw_char(270, 132, 'M', color, fb, 2);
+        draw_char(291, 132, 'E', color, fb, 2);
+        draw_char(309, 132, 'D', color, fb, 2);
+        draw_char(333, 132, 'I', color, fb, 2);
+        draw_char(346, 132, 'U', color, fb, 2);
+        draw_char(364, 132, 'M', color, fb, 2);
         break;
     case 2:
         // HARD
-        draw_char(254, 132, 'H', color, fb, 2);
-        draw_char(274, 132, 'A', color, fb, 2);
-        draw_char(292, 132, 'R', color, fb, 2);
-        draw_char(316, 132, 'D', color, fb, 2);
+        draw_char(270, 132, 'H', color, fb, 2);
+        draw_char(291, 132, 'A', color, fb, 2);
+        draw_char(309, 132, 'R', color, fb, 2);
+        draw_char(333, 132, 'D', color, fb, 2);
         break;
     default:
         break;

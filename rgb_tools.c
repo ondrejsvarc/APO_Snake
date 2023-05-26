@@ -14,6 +14,11 @@
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 
+void reset_RGB_LED ( unsigned char* mem_base ) {
+    *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0x0;
+    *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o ) = 0x0;
+}
+
 void changeRedRGBLED ( int status, unsigned char* mem_base) {
 
     switch ( status ) {
