@@ -148,12 +148,13 @@ void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
     }
 }
 
-void drawDifficultyChoice ( int choice, unsigned short color, unsigned short *fb ) {
+void drawDifficultyChoice ( int choice, unsigned short *fb ) {
     int row = difficultyRow;
     int col = difficultyColumn;
+    unsigned short color = COLOR_WHITE;
 
     // draw black box
-    for ( int i = row; i < row + 144; ++i ) {
+    for ( int i = row; i < row + 156; ++i ) {
         for ( int j = col; j < col + 32; ++j ) {
             draw_pixel( i, j, 0, fb );
         }
@@ -164,25 +165,25 @@ void drawDifficultyChoice ( int choice, unsigned short color, unsigned short *fb
     case 0:
         // EASY
         draw_char(254, 132, 'E', color, fb, 2);
-        draw_char(270, 132, 'A', color, fb, 2);
-        draw_char(286, 132, 'S', color, fb, 2);
-        draw_char(312, 132, 'Y', color, fb, 2);
+        draw_char(272, 132, 'A', color, fb, 2);
+        draw_char(290, 132, 'S', color, fb, 2);
+        draw_char(318, 132, 'Y', color, fb, 2);
         break;
     case 1:
         // MEDIUM
         draw_char(254, 132, 'M', color, fb, 2);
-        draw_char(270, 132, 'E', color, fb, 2);
-        draw_char(286, 132, 'D', color, fb, 2);
-        draw_char(312, 132, 'I', color, fb, 2);
-        draw_char(328, 132, 'U', color, fb, 2);
-        draw_char(344, 132, 'M', color, fb, 2);
+        draw_char(272, 132, 'E', color, fb, 2);
+        draw_char(290, 132, 'D', color, fb, 2);
+        draw_char(318, 132, 'I', color, fb, 2);
+        draw_char(334, 132, 'U', color, fb, 2);
+        draw_char(352, 132, 'M', color, fb, 2);
         break;
     case 2:
         // HARD
         draw_char(254, 132, 'H', color, fb, 2);
-        draw_char(270, 132, 'A', color, fb, 2);
-        draw_char(286, 132, 'R', color, fb, 2);
-        draw_char(312, 132, 'D', color, fb, 2);
+        draw_char(272, 132, 'A', color, fb, 2);
+        draw_char(290, 132, 'R', color, fb, 2);
+        draw_char(318, 132, 'D', color, fb, 2);
         break;
     default:
         break;
@@ -215,7 +216,7 @@ void drawMenu(unsigned short *fb) {
     }
 
     drawMenuChoice(0, 0x7e0, fb);
-    drawDifficultyChoice( 0, COLOR_WHITE, fb);
+    drawDifficultyChoice( 0, fb);
 
     free(random_string);
 }

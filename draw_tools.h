@@ -17,4 +17,4 @@ void drawMenu(unsigned short *fb);
 int char_width(int ch);
 void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb, int scale );
 void draw_pixel_big(int x, int y, unsigned short color, unsigned short *fb, int scale );
-void drawDifficultyChoice ( int choice, unsigned short color, unsigned short *fb );
+void drawDifficultyChoice ( int choice, unsigned short *fb );
