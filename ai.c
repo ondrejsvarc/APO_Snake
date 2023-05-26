@@ -6,26 +6,37 @@
 #include "ai.h"
 
 int generateFruitPosition ( Snake *snake1, Snake *snake2 ) {
-    int options = ( MAP_COLS * MAP_ROWS ) - snake1->length - snake2->length;
+    int mapSize = MAP_COLS * MAP_ROWS;
+    int options = ( mapSize ) - snake1->length - snake2->length;
 
     srand(time(NULL));
     int index = rand() % options;
 
-    for ( int i = 0; i < snake1->length; ++i ) {
-        if ( snake1->body[i] <= index ) {
-            index++;
-            i = 0;
+    int tiles[options];
+    int k = 0;
+
+    for ( int i = 0; i < mapSize; ++i ) {
+        bool ocupied = false;
+        for ( int j = 0; j < snake1->length; ++j ) {
+            if ( i == snake1->body[j] ) {
+                ocupied = true;
+                break;
+            }
+        }
+        for ( int j = 0; j < snake2->length; ++j ) {
+            if ( i == snake2->body[j] ) {
+                ocupied = true;
+                break;
+            }
+        }
+
+        if ( !ocupied ) {
+            tiles[k] = i;
+            k++;
         }
     }
 
-    for ( int i = 0; i < snake2->length; ++i ) {
-        if ( snake2->body[i] <= index ) {
-            index++;
-            i = 0;
-        }
-    }
-
-    return index;
+    return tiles[index];
 }
 
 int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
@@ -99,10 +110,12 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         }
     }
 
-    int bestMove;
+    int bestMove = 0;
+    int secondBestMove = 0;
     int bestGrade = -2;
     for ( int i = 0; i < 4; ++i ) {
         if ( moveGrades[i] >= bestGrade ) {
+            secondBestMove = bestMove;
             bestGrade = moveGrades[i];
             bestMove = i;
         }
@@ -117,6 +130,10 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         heading = 1;
     } else {
         heading = 3;
+    }
+
+    if ( bestMove == (heading + 2) % 4 || bestMove == (heading - 2) % 4) {
+        bestMove = secondBestMove;
     }
 
     if ( bestMove == (heading + 1) % 4 || bestMove == (heading - 3) % 4 ) {
