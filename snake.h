@@ -1,6 +1,8 @@
 #ifndef SNAKE_H
+#define SNAKE_H
 
 #include <stdbool.h>
+#include "draw_tools.h"
 #ifndef MAP_ROWS
 #define MAP_ROWS 16
 #endif

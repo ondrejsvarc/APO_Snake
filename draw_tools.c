@@ -107,7 +107,7 @@ void draw_pixel ( int x, int y, unsigned short color, unsigned short *fb ) {
 
 void drawTile ( int index, unsigned short color, unsigned short *fb ) {
     int x = index % 24;
-    int y = ( index - x ) / 16;
+    int y = ( index - x ) / 24;
     int startX = x * 20;
     int maxX = startX + 20;
     int startY = y * 20;

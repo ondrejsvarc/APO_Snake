@@ -10,7 +10,6 @@
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 #include "draw_tools.h"
-#include "snake.h"
 #include "led_tools.h"
 #include "input_tools.h"
 #include "font_types.h"
@@ -110,6 +109,7 @@ int main(int argc, char *argv[]) {
     }
     parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
+    changeLengthLed(10, 24, mem_base);
     start_menu();
 
     printf("Bye!\n");
