@@ -72,7 +72,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     int moveGrades[4];
 
     for ( int i = 0; i < 4; ++i ) {
-        int posX, posY;
+        int posX = 0, posY = 0;
         switch ( i )
         {
         case 0:
@@ -112,11 +112,9 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     }
 
     int bestMove = 0;
-    int secondBestMove = 0;
     int bestGrade = -2;
     for ( int i = 0; i < 4; ++i ) {
         if ( moveGrades[i] >= bestGrade ) {
-            secondBestMove = bestMove;
             bestGrade = moveGrades[i];
             bestMove = i;
         }

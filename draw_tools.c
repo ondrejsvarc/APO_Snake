@@ -25,7 +25,7 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   // Game Over text
   draw_char(80, 40, 'G', COLOR_BLUE + COLOR_RED, fb, 4);
   draw_char(118, 40, 'A', COLOR_BLUE + COLOR_RED, fb, 4);
-  draw_char(151, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
+  draw_char(150, 40, 'M', COLOR_BLUE + COLOR_RED, fb, 4);
   draw_char(193, 40, 'E', COLOR_BLUE + COLOR_RED, fb, 4);
 
   draw_char(258, 40, 'O', COLOR_BLUE + COLOR_RED, fb, 4);
