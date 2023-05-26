@@ -143,7 +143,7 @@ void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
 
     for ( int i = rowStart; i < rowEnd; ++i ) {
         for ( int j = firstColumn; j < lastColumn; ++j ) {
-            draw_pixel( j, i, color, fb );
+            draw_pixel( i, j, color, fb );
         }
     }
 }
