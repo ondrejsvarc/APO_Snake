@@ -26,7 +26,7 @@ void change_red_RGB_LED (int status, unsigned char* mem_base) {
     }
 }
 
-void changeBlueRGBLED ( int status, unsigned char* mem_base) {
+void change_blue_RGB_LED ( int status, unsigned char* mem_base) {
 
     switch ( status ) {
     case 0:
