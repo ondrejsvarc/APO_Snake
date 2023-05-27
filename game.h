@@ -1,5 +1,5 @@
 /**********************************************************************
-  game.c containing functions for starting and running a game of Snake.
+  game.h containing functions for starting and running a game of Snake.
  
   Created by Michal Komanec and Ondrej Svarc.
  

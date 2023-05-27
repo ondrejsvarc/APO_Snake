@@ -1,5 +1,5 @@
 /*******************************************************************
-  snake.c containing struct and functions for moving Snake.
+  snake.h containing Snake struct and functions for moving Snake.
  
   Created by Michal Komanec and Ondrej Svarc.
  
@@ -10,6 +10,7 @@
 
 #include <stdbool.h>
 #include "draw_tools.h"
+
 #ifndef MAP_ROWS
 #define MAP_ROWS 16
 #endif
