@@ -6,7 +6,7 @@ void reset_RGB_LED ( unsigned char* mem_base ) {
     *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o ) = LED_OFF;
 }
 
-void changeRedRGBLED ( int status, unsigned char* mem_base) {
+void change_red_RGB_LED (int status, unsigned char* mem_base) {
 
     switch ( status ) {
     case 0:

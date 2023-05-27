@@ -45,7 +45,7 @@ void reset_RGB_LED ( unsigned char* mem_base );
  *               - 2: Dead (LED color: Red)
  * @param mem_base A pointer to the base address of the memory mapping.
  */
-void changeRedRGBLED ( int status, unsigned char* mem_base);
+void change_red_RGB_LED (int status, unsigned char* mem_base);
 
 /**
  * Changes the status of the right RGB LED based on the provided status value.
@@ -56,4 +56,4 @@ void changeRedRGBLED ( int status, unsigned char* mem_base);
  *               - 2: Dead (LED color: Red)
  * @param mem_base A pointer to the base address of the memory mapping.
  */
-void changeBlueRGBLED ( int status, unsigned char* mem_base);
+void change_blue_RGB_LED (int status, unsigned char* mem_base);

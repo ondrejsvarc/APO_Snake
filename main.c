@@ -52,11 +52,11 @@ int main(int argc, char *argv[]) {
 /*Open game menu, show options and interact with user.*/
 void start_menu() {
   // reset LEDs
-  changeLengthLed(0, 0, mem_base);
+    change_LED_strip_length(0, 0, mem_base);
   reset_RGB_LED(mem_base);
 
   // draw menu image
-  drawMenu(fb);
+    draw_menu(fb);
 
   // write frame buffer to LCD display
   for (int i = 0; i < 320*480; i++) {
@@ -70,24 +70,24 @@ void start_menu() {
 
   long int speed_choices[3] = {SPEED_EASY, SPEED_MEDIUM, SPEED_HARD};
 
-  int old_green_val = getGreenValue(mem_base);
-  int old_blue_val = getBlueValue(mem_base);
+  int old_green_val = get_green_value(mem_base);
+  int old_blue_val = get_blue_value(mem_base);
 
   short move_green;
   short move_blue;
 
   while (1) {
       // handle encoders
-      move_green = getGreenMovement(mem_base, old_green_val);
-      move_blue = getBlueMovement(mem_base, old_blue_val);
+      move_green = get_green_movement(mem_base, old_green_val);
+      move_blue = get_blue_movement(mem_base, old_blue_val);
       if (move_green != 0) {
-        old_green_val = getGreenValue(mem_base);
+        old_green_val = get_green_value(mem_base);
       }
       if (move_blue != 0) {
-        old_blue_val = getBlueValue(mem_base);
+        old_blue_val = get_blue_value(mem_base);
       }
       // check if green encoder has been pressed - start games or exit
-      if (pressGreen(mem_base)) {
+      if (green_pressed(mem_base)) {
         switch (menu_choice) {
           case 0: 
             start_zero_players_game(speed_choices[diff_choice], fb, mem_base, parlcd_mem_base);
@@ -106,23 +106,23 @@ void start_menu() {
             }
             parlcd_write_cmd(parlcd_mem_base, 0x2c);
             // reset LEDs and exit
-            changeLengthLed(0, 0, mem_base);
+                change_LED_strip_length(0, 0, mem_base);
             reset_RGB_LED(mem_base);
             return;
         }
         // the game ended and the program is back in the menu state, reset LEDs and menu variables and draw menu
-        changeLengthLed(0, 0, mem_base);
+          change_LED_strip_length(0, 0, mem_base);
         reset_RGB_LED(mem_base);
-        drawMenu(fb);
+          draw_menu(fb);
 
         menu_choice = 0;
         diff_choice = 0;
 
-        old_green_val = getGreenValue(mem_base);
-        old_blue_val = getBlueValue(mem_base);
+        old_green_val = get_green_value(mem_base);
+        old_blue_val = get_blue_value(mem_base);
 
-        drawMenuChoice(menu_choice, COLOR_GREEN, fb);
-        drawDifficultyChoice(diff_choice, fb);
+          draw_menu_choice(menu_choice, COLOR_GREEN, fb);
+          draw_difficulty_choice(diff_choice, fb);
 
         for (int i = 0; i < 320*480; i++) {
           parlcd_write_data(parlcd_mem_base, fb[i]);
@@ -138,7 +138,7 @@ void start_menu() {
       // check if menu choice has changed
       if (move_green != 0) {
         // black out the old choice
-        drawMenuChoice(menu_choice, COLOR_BLACK, fb);
+          draw_menu_choice(menu_choice, COLOR_BLACK, fb);
         // handle menu choice variable
         if (move_green == -1) {
           menu_choice = menu_choice == 0 ? 3 : menu_choice-1;
@@ -146,7 +146,7 @@ void start_menu() {
           menu_choice = (menu_choice+1)%4;
         }
         // draw new menu choice
-        drawMenuChoice(menu_choice, COLOR_GREEN, fb);
+          draw_menu_choice(menu_choice, COLOR_GREEN, fb);
 
         // write frame buffer to LCD display
         for (int i = 0; i < 320*480; i++) {
@@ -164,7 +164,7 @@ void start_menu() {
             diff_choice = (diff_choice+1)%3;
         }
         // draw new difficulty choice
-        drawDifficultyChoice(diff_choice, fb);
+          draw_difficulty_choice(diff_choice, fb);
 
         // write frame buffer to LCD display
         for (int i = 0; i < 320*480; i++) {

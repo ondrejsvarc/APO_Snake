@@ -1,6 +1,6 @@
 #include "ai.h"
 
-int generateFruitPosition ( Snake *snake1, Snake *snake2 ) {
+int generate_fruit_position (Snake *snake1, Snake *snake2 ) {
     // Get initial information
     int mapSize = MAP_COLS * MAP_ROWS;
     int options = ( mapSize ) - snake1->length - snake2->length;
@@ -38,7 +38,7 @@ int generateFruitPosition ( Snake *snake1, Snake *snake2 ) {
     return tiles[index];
 }
 
-int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
+int generate_AI_move (Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     // Get initial information
     bool map[MAP_COLS][MAP_ROWS];
     int fruitX = fruitIndex % MAP_COLS;

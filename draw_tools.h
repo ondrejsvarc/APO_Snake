@@ -49,7 +49,7 @@ void draw_score ( int score1, int score2, unsigned short *fb );
  * @param color The color of the tile.
  * @param fb    A pointer to the frame buffer.
  */
-void drawTile ( int index, unsigned short color, unsigned short *fb );
+void draw_tile (int index, unsigned short color, unsigned short *fb );
 
 /**
  * Draws a fruit at the specified index on the screen.
@@ -57,7 +57,7 @@ void drawTile ( int index, unsigned short color, unsigned short *fb );
  * @param index The index of the fruit position on the game map.
  * @param fb    A pointer to the frame buffer.
  */
-void drawFruit ( int index, unsigned short *fb );
+void draw_fruit (int index, unsigned short *fb );
 
 /**
  * Converts an integer to a string representation.
@@ -76,14 +76,14 @@ void to_string ( char str[], int num );
  * @param color  The color of the menu choice.
  * @param fb     A pointer to the frame buffer.
  */
-void drawMenuChoice ( int choice,unsigned short color, unsigned short *fb );
+void draw_menu_choice (int choice, unsigned short color, unsigned short *fb );
 
 /**
  * Loads and displays a menu image on the screen, along with the initial game mode and difficulty choices.
  *
  * @param fb The framebuffer pointer.
  */
-void drawMenu(unsigned short *fb);
+void draw_menu(unsigned short *fb);
 
 /**
  * Draws the selected difficulty choice on the screen.
@@ -91,7 +91,7 @@ void drawMenu(unsigned short *fb);
  * @param choice The difficulty choice index (0 for easy, 1 for medium, 2 for hard).
  * @param fb     A pointer to the frame buffer.
  */
-void drawDifficultyChoice ( int choice, unsigned short *fb );
+void draw_difficulty_choice (int choice, unsigned short *fb );
 
 void draw_pixel ( int x, int y, unsigned short color, unsigned short *fb );
 int char_width(int ch);

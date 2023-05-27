@@ -27,19 +27,24 @@ typedef struct {
  * 
  * @param snake Snake to be moved.
  * @param other_snake Snake to be checked for collision.
- * @param direction The direction change, see function change_heading.
+ * @param heading_change The heading change direction:
+ *                        - -1: turn left
+ *                        -  0: keep straight
+ *                        -  1: turn right
  * @param fruit_pos Pointer to the fruit position.
  * @param fb Pointer to the frame buffer.
  */
-void move_snake(Snake *snake, Snake *other_snake, short direction, int * fruit_pos, unsigned short *fb);
+void move_snake(Snake *snake, Snake *other_snake, short heading_change, int * fruit_pos, unsigned short *fb);
 
 /**
  * Change heading of the given snake with heading_change.
+
  * 
- * heading_change options: {-1 = turn left, 0 = keep straight, 1 = turn right}
- * 
- * @param snake The snake whose heading will be chaned.
- * @param heading_change The heading change direction.
+ * @param snake The snake whose heading will be changed.
+ * @param heading_change The heading change direction:
+ *                        - -1: turn left
+ *                        -  0: keep straight
+ *                        -  1: turn right
 */
 void change_heading(Snake *snake, short heading_change);
 #endif

@@ -14,7 +14,7 @@ bool abort_game ( unsigned char *mem_base ) {
     return false;
 }
 
-bool pressGreen ( unsigned char *mem_base ) {
+bool green_pressed (unsigned char *mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
 
     // Check if green knob is pressed
@@ -48,32 +48,32 @@ int get_direction ( int value, int previousValue ) {
     return 0;
 }
 
-int getRedValue ( unsigned char *mem_base ) {
+int get_red_value (unsigned char *mem_base ) {
     get_values( mem_base );
     return redValue;
 }
 
-int getRedMovement ( unsigned char *mem_base, int previousValue ) {
-    int value = getRedValue( mem_base );
+int get_red_movement (unsigned char *mem_base, int previousValue ) {
+    int value = get_red_value(mem_base);
     return get_direction( value, previousValue );
 }
 
-int getBlueValue ( unsigned char *mem_base ) {
+int get_blue_value (unsigned char *mem_base ) {
     get_values( mem_base );
     return blueValue;
 }
 
-int getBlueMovement ( unsigned char *mem_base, int previousValue ) {
-    int value = getBlueValue( mem_base );
+int get_blue_movement (unsigned char *mem_base, int previousValue ) {
+    int value = get_blue_value(mem_base);
     return get_direction( value, previousValue );
 }
 
-int getGreenValue ( unsigned char *mem_base ) {
+int get_green_value (unsigned char *mem_base ) {
     get_values( mem_base );
     return greenValue;
 }
 
-int getGreenMovement ( unsigned char *mem_base, int previousValue ) {
-    int value = getGreenValue( mem_base );
+int get_green_movement (unsigned char *mem_base, int previousValue ) {
+    int value = get_green_value(mem_base);
     return get_direction( value, previousValue );
 }

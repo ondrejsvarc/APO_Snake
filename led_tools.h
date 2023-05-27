@@ -27,4 +27,4 @@
  * @param length2 An unsigned short representing the second length value.
  * @param mem_base A pointer to the base address of the memory mapping.
  */
-void changeLengthLed ( unsigned short length1, unsigned short length2, unsigned char* mem_base );
+void change_LED_strip_length (unsigned short length1, unsigned short length2, unsigned char* mem_base );

@@ -189,7 +189,7 @@ void draw_pixel ( int x, int y, unsigned short color, unsigned short *fb ) {
   }
 }
 
-void drawTile ( int index, unsigned short color, unsigned short *fb ) {
+void draw_tile (int index, unsigned short color, unsigned short *fb ) {
   // Get initial information
   int x = index % 24;
   int y = ( index - x ) / 24;
@@ -206,7 +206,7 @@ void drawTile ( int index, unsigned short color, unsigned short *fb ) {
   }
 }
 
-void drawFruit ( int index, unsigned short *fb ) {
+void draw_fruit (int index, unsigned short *fb ) {
   // Get initial information
   int x = index % 24;
   int y = ( index - x ) / 24;
@@ -223,7 +223,7 @@ void drawFruit ( int index, unsigned short *fb ) {
   }
 }
 
-void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
+void draw_menu_choice (int choice, unsigned short color, unsigned short *fb ) {
   // Get initial information
   int rowStart = firstRow + choice * squareModifier;
   int rowEnd = rowStart + squareSize;
@@ -237,7 +237,7 @@ void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
   }
 }
 
-void drawDifficultyChoice ( int choice, unsigned short *fb ) {
+void draw_difficulty_choice (int choice, unsigned short *fb ) {
   // Get initial information
   int row = difficultyRow;
   int col = difficultyColumn;
@@ -280,7 +280,7 @@ void drawDifficultyChoice ( int choice, unsigned short *fb ) {
   }
 }
 
-void drawMenu(unsigned short *fb) {
+void draw_menu(unsigned short *fb) {
   // Open ppm menu image
   FILE *menu_img_file = fopen("/tmp/komanmi1/snake.ppm", "rb");
   if (menu_img_file == NULL) {
@@ -309,8 +309,8 @@ void drawMenu(unsigned short *fb) {
   }
 
   // Draw initial game mode and difficulty choices
-  drawMenuChoice(0, 0x7e0, fb);
-  drawDifficultyChoice( 0, fb);
+    draw_menu_choice(0, 0x7e0, fb);
+    draw_difficulty_choice(0, fb);
 
   // Free useless data
   free(random_string);

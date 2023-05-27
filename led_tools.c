@@ -1,6 +1,6 @@
 #include "led_tools.h"
  
-void changeLengthLed ( unsigned short length1, unsigned short length2, unsigned char* mem_base ) {
+void change_LED_strip_length (unsigned short length1, unsigned short length2, unsigned char* mem_base ) {
     // Get ones and tens of the lengths
     short ones1 = length1 % 10;
     short tens1 = ( length1 - ones1 ) / 10;

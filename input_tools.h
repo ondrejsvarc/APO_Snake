@@ -34,7 +34,7 @@ bool abort_game ( unsigned char *mem_base );
  * @param mem_base The memory base address.
  * @return True if the green knob is pressed, false otherwise.
  */
-bool pressGreen ( unsigned char *mem_base );
+bool green_pressed (unsigned char *mem_base );
 
 /**
  * Retrieves the values of the red, green, and blue knobs.
@@ -58,7 +58,7 @@ int get_direction ( int value, int previousValue );
  * @param mem_base  Base address of the memory mapping.
  * @return          The value of the red knob.
  */
-int getRedValue ( unsigned char *mem_base );
+int get_red_value (unsigned char *mem_base );
 
 /**
  * Retrieves the movement direction of the red knob.
@@ -67,7 +67,7 @@ int getRedValue ( unsigned char *mem_base );
  * @param previousValue  The previous value of the red knob.
  * @return               The movement direction of the red knob (-1 for left, 1 for right, 0 for straight).
  */
-int getRedMovement ( unsigned char *mem_base, int previousValue );
+int get_red_movement (unsigned char *mem_base, int previousValue );
 
 /**
  * Retrieves the value of the blue knob.
@@ -75,7 +75,7 @@ int getRedMovement ( unsigned char *mem_base, int previousValue );
  * @param mem_base  Base address of the memory mapping.
  * @return          The value of the blue knob.
  */
-int getBlueValue ( unsigned char *mem_base );
+int get_blue_value (unsigned char *mem_base );
 
 /**
  * Retrieves the movement direction of the blue knob.
@@ -84,7 +84,7 @@ int getBlueValue ( unsigned char *mem_base );
  * @param previousValue  The previous value of the blue knob.
  * @return               The movement direction of the blue knob (-1 for left, 1 for right, 0 for straight).
  */
-int getBlueMovement ( unsigned char *mem_base, int previousValue );
+int get_blue_movement (unsigned char *mem_base, int previousValue );
 
 /**
  * Retrieves the value of the green knob.
@@ -92,7 +92,7 @@ int getBlueMovement ( unsigned char *mem_base, int previousValue );
  * @param mem_base  Base address of the memory mapping.
  * @return          The value of the green knob.
  */
-int getGreenValue ( unsigned char *mem_base );
+int get_green_value (unsigned char *mem_base );
 
 /**
  * Retrieves the movement direction of the green knob.
@@ -101,4 +101,4 @@ int getGreenValue ( unsigned char *mem_base );
  * @param previousValue  The previous value of the green knob.
  * @return               The movement direction of the green knob (-1 for left, 1 for right, 0 for straight).
  */
-int getGreenMovement ( unsigned char *mem_base, int previousValue );
+int get_green_movement (unsigned char *mem_base, int previousValue );

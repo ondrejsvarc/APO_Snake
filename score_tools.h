@@ -15,4 +15,4 @@
  * @param snake2 A pointer to the second snake.
  * @param fb The framebuffer to draw the scores on.
  */
-void updateScores ( Snake *snake1, Snake *snake2, unsigned short *fb );
+void update_scores (Snake *snake1, Snake *snake2, unsigned short *fb );

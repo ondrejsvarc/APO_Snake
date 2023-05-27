@@ -20,7 +20,7 @@
  *
  * @return An integer representing the index of the generated fruit position on the game map.
  */
-int generateFruitPosition ( Snake *snake1, Snake *snake2 );
+int generate_fruit_position (Snake *snake1, Snake *snake2 );
 
 /**
  * Generates the AI's next move direction based on the current game state.
@@ -32,4 +32,4 @@ int generateFruitPosition ( Snake *snake1, Snake *snake2 );
  * @return An integer representing the AI's next move direction:
  *         -1 for left, 0 for no change, 1 for right.
  */
-int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex );
+int generate_AI_move (Snake *snakeToMove, Snake *snake2, int fruitIndex );
