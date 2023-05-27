@@ -1,5 +1,5 @@
 /*******************************************************************
-  led_tools.c containing functions for manipulating with the 
+  led_tools.c containing functions for manipulating the 
   LED stripe.
  
   Created by Ondrej Svarc and Michal Komanec.
