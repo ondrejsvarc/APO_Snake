@@ -24,7 +24,7 @@
 #define LED_RED 0xff0000
 #define LED_BLUE 0xff
 #define LED_GREEN 0xff00
-#define LED_OFF 0x0
+#define LED_OFF 0x00
 #define ALIVE_STATUS 0
 #define FRUIT_STATUS 1
 #define DEAD_STATUS 2
