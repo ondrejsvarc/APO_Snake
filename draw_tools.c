@@ -1,8 +1,9 @@
 #include "draw_tools.h"
 
-
+// Font Descriptor
 font_descriptor_t *fdes = &font_winFreeSystem14x16;
 
+// Pixel indexes
 int firstRow = 106;
 int firstColumn = 24;
 int squareModifier = 46;
@@ -11,6 +12,7 @@ int difficultyRow = 254;
 int difficultyColumn = 132;
 
 void paint_it_black ( unsigned short *fb ) {
+  // Fill buffer with black color
   for ( int i = 0; i < 480; ++i ) {
     for ( int j = 0; j < 320; ++j ) {
       draw_pixel( i, j, COLOR_BLACK, fb );
@@ -90,7 +92,6 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
   draw_char(370, 290, 'E', COLOR_WHITE, fb, 1);
   draw_char(380, 290, 'N', COLOR_WHITE, fb, 1);
   draw_char(390, 290, 'U', COLOR_WHITE, fb, 1);
-
 }
 
 void draw_score ( int score1, int score2, unsigned short *fb ) {
@@ -109,23 +110,22 @@ void draw_score ( int score1, int score2, unsigned short *fb ) {
 
     // Get number strings
     char num1[6], num2[6];
-    toString( num1, score1 );
-    toString( num2, score2 );
+    to_string( num1, score1 );
+    to_string( num2, score2 );
 
     // Print score1
-    draw_char(0, 0, num1[0], 0xffff, fb, 1);
-    draw_char(8, 0, num1[1], 0xffff, fb, 1);
-    draw_char(16, 0, num1[2], 0xffff, fb, 1);
-    draw_char(24, 0, num1[3], 0xffff, fb, 1);
-    draw_char(32, 0, num1[4], 0xffff, fb, 1);
+    draw_char(0, 0, num1[0], COLOR_WHITE, fb, 1);
+    draw_char(8, 0, num1[1], COLOR_WHITE, fb, 1);
+    draw_char(16, 0, num1[2], COLOR_WHITE, fb, 1);
+    draw_char(24, 0, num1[3], COLOR_WHITE, fb, 1);
+    draw_char(32, 0, num1[4], COLOR_WHITE, fb, 1);
 
     // Print score2
-    draw_char(440, 0, num2[0], 0xffff, fb, 1);
-    draw_char(448, 0, num2[1], 0xffff, fb, 1);
-    draw_char(456, 0, num2[2], 0xffff, fb, 1);
-    draw_char(464, 0, num2[3], 0xffff, fb, 1);
-    draw_char(472, 0, num2[4], 0xffff, fb, 1);
-
+    draw_char(440, 0, num2[0], COLOR_WHITE, fb, 1);
+    draw_char(448, 0, num2[1], COLOR_WHITE, fb, 1);
+    draw_char(456, 0, num2[2], COLOR_WHITE, fb, 1);
+    draw_char(464, 0, num2[3], COLOR_WHITE, fb, 1);
+    draw_char(472, 0, num2[4], COLOR_WHITE, fb, 1);
 }
 
 void draw_pixel_big(int x, int y, unsigned short color, unsigned short *fb, int scale ) {
@@ -171,9 +171,9 @@ void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb, 
   }
 }
 
-void toString ( char str[], int num ) {
+void to_string ( char str[], int num ) {
     int i, rem, len = 5;
-
+    // Transfer number to string
     for (i = 0; i < len; i++)
     {
         rem = num % 10;
@@ -190,117 +190,128 @@ void draw_pixel ( int x, int y, unsigned short color, unsigned short *fb ) {
 }
 
 void drawTile ( int index, unsigned short color, unsigned short *fb ) {
-    int x = index % 24;
-    int y = ( index - x ) / 24;
-    int startX = x * 20;
-    int maxX = startX + 20;
-    int startY = y * 20;
-    int maxY = startY + 20;
+  // Get initial information
+  int x = index % 24;
+  int y = ( index - x ) / 24;
+  int startX = x * 20;
+  int maxX = startX + 20;
+  int startY = y * 20;
+  int maxY = startY + 20;
 
-    for ( int i = startX; i < maxX; ++ i ) {
-        for ( int j = startY; j < maxY; ++j ) {
-            draw_pixel( i, j, color, fb );
-        }
-    }
-
+  // Draw the tile
+  for ( int i = startX; i < maxX; ++ i ) {
+      for ( int j = startY; j < maxY; ++j ) {
+          draw_pixel( i, j, color, fb );
+      }
+  }
 }
 
 void drawFruit ( int index, unsigned short *fb ) {
-    int x = index % 24;
-    int y = ( index - x ) / 24;
-    int startX = x * 20 + 5;
-    int maxX = startX + 10;
-    int startY = y * 20 + 5;
-    int maxY = startY + 10;
+  // Get initial information
+  int x = index % 24;
+  int y = ( index - x ) / 24;
+  int startX = x * 20 + 5;
+  int maxX = startX + 10;
+  int startY = y * 20 + 5;
+  int maxY = startY + 10;
 
-    for ( int i = startX; i < maxX; ++ i ) {
-        for ( int j = startY; j < maxY; ++j ) {
-            draw_pixel( i, j, COLOR_YELLOW, fb );
-        }
-    }
+  // Draw the fruit
+  for ( int i = startX; i < maxX; ++ i ) {
+      for ( int j = startY; j < maxY; ++j ) {
+          draw_pixel( i, j, COLOR_YELLOW, fb );
+      }
+  }
 }
 
 void drawMenuChoice ( int choice, unsigned short color, unsigned short *fb ) {
-    int rowStart = firstRow + choice * squareModifier;
-    int rowEnd = rowStart + squareSize;
-    int lastColumn = firstColumn + squareSize;
+  // Get initial information
+  int rowStart = firstRow + choice * squareModifier;
+  int rowEnd = rowStart + squareSize;
+  int lastColumn = firstColumn + squareSize;
 
-    for ( int i = rowStart; i < rowEnd; ++i ) {
-        for ( int j = firstColumn; j < lastColumn; ++j ) {
-            draw_pixel( j, i, color, fb );
-        }
-    }
+  // Draw menu choice
+  for ( int i = rowStart; i < rowEnd; ++i ) {
+      for ( int j = firstColumn; j < lastColumn; ++j ) {
+          draw_pixel( j, i, color, fb );
+      }
+  }
 }
 
 void drawDifficultyChoice ( int choice, unsigned short *fb ) {
-    int row = difficultyRow;
-    int col = difficultyColumn;
-    unsigned short color = COLOR_WHITE;
+  // Get initial information
+  int row = difficultyRow;
+  int col = difficultyColumn;
+  unsigned short color = COLOR_WHITE;
 
-    // draw black box
-    for ( int i = row; i < row + 200; ++i ) {
-        for ( int j = col; j < col + 40; ++j ) {
-            draw_pixel( i, j, 0, fb );
-        }
-    }
+  // Draw black box
+  for ( int i = row; i < row + 200; ++i ) {
+      for ( int j = col; j < col + 40; ++j ) {
+          draw_pixel( i, j, 0, fb );
+      }
+  }
 
-    // Draw choice
-    switch ( choice ) {
-    case 0:
-        // EASY
-        draw_char(270, 140, 'E', color, fb, 2);
-        draw_char(291, 140, 'A', color, fb, 2);
-        draw_char(309, 140, 'S', color, fb, 2);
-        draw_char(333, 140, 'Y', color, fb, 2);
-        break;
-    case 1:
-        // MEDIUM
-        draw_char(270, 140, 'M', color, fb, 2);
-        draw_char(291, 140, 'E', color, fb, 2);
-        draw_char(309, 140, 'D', color, fb, 2);
-        draw_char(333, 140, 'I', color, fb, 2);
-        draw_char(346, 140, 'U', color, fb, 2);
-        draw_char(364, 140, 'M', color, fb, 2);
-        break;
-    case 2:
-        // HARD
-        draw_char(270, 140, 'H', color, fb, 2);
-        draw_char(291, 140, 'A', color, fb, 2);
-        draw_char(309, 140, 'R', color, fb, 2);
-        draw_char(333, 140, 'D', color, fb, 2);
-        break;
-    default:
-        break;
-    }
-
+  // Draw choice
+  switch ( choice ) {
+  case 0:
+      // EASY
+      draw_char(270, 140, 'E', color, fb, 2);
+      draw_char(291, 140, 'A', color, fb, 2);
+      draw_char(309, 140, 'S', color, fb, 2);
+      draw_char(333, 140, 'Y', color, fb, 2);
+      break;
+  case 1:
+      // MEDIUM
+      draw_char(270, 140, 'M', color, fb, 2);
+      draw_char(291, 140, 'E', color, fb, 2);
+      draw_char(309, 140, 'D', color, fb, 2);
+      draw_char(333, 140, 'I', color, fb, 2);
+      draw_char(346, 140, 'U', color, fb, 2);
+      draw_char(364, 140, 'M', color, fb, 2);
+      break;
+  case 2:
+      // HARD
+      draw_char(270, 140, 'H', color, fb, 2);
+      draw_char(291, 140, 'A', color, fb, 2);
+      draw_char(309, 140, 'R', color, fb, 2);
+      draw_char(333, 140, 'D', color, fb, 2);
+      break;
+  default:
+      break;
+  }
 }
 
 void drawMenu(unsigned short *fb) {
-    FILE *menu_img_file = fopen("/tmp/komanmi1/snake.ppm", "rb");
-    if (menu_img_file == NULL) {
-        fprintf(stderr, "Error opening snake.ppm");
-        exit(1);
-    }
+  // Open ppm menu image
+  FILE *menu_img_file = fopen("/tmp/komanmi1/snake.ppm", "rb");
+  if (menu_img_file == NULL) {
+      fprintf(stderr, "Error opening snake.ppm");
+      exit(1);
+  }
 
-    unsigned char *menu_img_buffer = (unsigned char*) malloc(320*480*3);
-    if (menu_img_buffer == NULL) {
-        fprintf(stderr, "Couldn't allocate memory for menu image buffer!");
-        exit(1);
-    }
+  // Create menu image buffer
+  unsigned char *menu_img_buffer = (unsigned char*) malloc(320*480*3);
+  if (menu_img_buffer == NULL) {
+      fprintf(stderr, "Couldn't allocate memory for menu image buffer!");
+      exit(1);
+  }
 
-    char *random_string = (char*)malloc(50);
-    for (int i = 0; i < 4; i++) {
-        fscanf(menu_img_file, "%s\n", random_string);
-    }
-    
-    fread(menu_img_buffer, sizeof(unsigned char), 320*480*3, menu_img_file);
-    for (int i = 0; i < 320*480; i++) {
-        //fb[i] = (((((menu_img_buffer[i*3]/0xff)*0x3f)<<11)&0xf800) + ((((menu_img_buffer[i*3+1]/0xff)*0x7f)<<5)&0x7ff) + (((menu_img_buffer[i*3+2]/0xff)*0x3f)&0x1f));        
-        fb[i] = ((((menu_img_buffer[i*3]/0xff)*0x1f)<<11) + (((menu_img_buffer[i*3+1]/0xff)*0x3f)<<5)) + (((menu_img_buffer[i*3+2]/0xff)*0x1f));        
-    }
+  // Eat useless data
+  char *random_string = (char*)malloc(50);
+  for (int i = 0; i < 4; i++) {
+      fscanf(menu_img_file, "%s\n", random_string);
+  }
+  
+  // Load menu image to the buffer
+  fread(menu_img_buffer, sizeof(unsigned char), 320*480*3, menu_img_file);
+  for (int i = 0; i < 320*480; i++) {
+      //fb[i] = (((((menu_img_buffer[i*3]/0xff)*0x3f)<<11)&0xf800) + ((((menu_img_buffer[i*3+1]/0xff)*0x7f)<<5)&0x7ff) + (((menu_img_buffer[i*3+2]/0xff)*0x3f)&0x1f));        
+      fb[i] = ((((menu_img_buffer[i*3]/0xff)*0x1f)<<11) + (((menu_img_buffer[i*3+1]/0xff)*0x3f)<<5)) + (((menu_img_buffer[i*3+2]/0xff)*0x1f));        
+  }
 
-    drawMenuChoice(0, 0x7e0, fb);
-    drawDifficultyChoice( 0, fb);
+  // Draw initial game mode and difficulty choices
+  drawMenuChoice(0, 0x7e0, fb);
+  drawDifficultyChoice( 0, fb);
 
-    free(random_string);
+  // Free useless data
+  free(random_string);
 }
