@@ -1,5 +1,27 @@
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
+
 #include "snake.h"
 
+/**
+ * Generates a random position for the fruit on the game map that is not occupied by the snakes.
+ *
+ * @param snake1 A pointer to the first snake structure.
+ * @param snake2 A pointer to the second snake structure.
+ *
+ * @return An integer representing the index of the generated fruit position on the game map.
+ */
 int generateFruitPosition ( Snake *snake1, Snake *snake2 );
 
+/**
+ * Generates the AI's next move direction based on the current game state.
+ *
+ * @param snakeToMove A pointer to the snake structure that the AI controls.
+ * @param snake2      A pointer to the second snake structure.
+ * @param fruitIndex  The index of the fruit position on the game map.
+ *
+ * @return An integer representing the AI's next move direction:
+ *         -1 for left, 0 for no change, 1 for right.
+ */
 int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex );

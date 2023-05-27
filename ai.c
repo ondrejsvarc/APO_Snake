@@ -1,20 +1,18 @@
-#include <stdlib.h>
-#include <time.h>
-#include <stdbool.h>
-
-#include "snake.h"
 #include "ai.h"
 
 int generateFruitPosition ( Snake *snake1, Snake *snake2 ) {
+    // Get initial information
     int mapSize = MAP_COLS * MAP_ROWS;
     int options = ( mapSize ) - snake1->length - snake2->length;
 
+    // Get random index
     srand(time(NULL));
     int index = rand() % options;
 
     int tiles[options];
     int k = 0;
 
+    // Get all valid mp tiles
     for ( int i = 0; i < mapSize; ++i ) {
         bool occupied = false;
         for ( int j = 0; j < snake1->length; ++j ) {
@@ -36,10 +34,12 @@ int generateFruitPosition ( Snake *snake1, Snake *snake2 ) {
         }
     }
 
+    // Return random empty map tile
     return tiles[index];
 }
 
 int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
+    // Get initial information
     bool map[MAP_COLS][MAP_ROWS];
     int fruitX = fruitIndex % MAP_COLS;
     int fruitY = ( fruitIndex - fruitX ) / MAP_COLS;
@@ -48,14 +48,17 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     short headDirectionX = snakeToMove->heading[0];
     short headDirectionY = snakeToMove->heading[1];
 
+    // Get distance from fruit
     int distance = abs( headX - fruitX ) + abs( headY - fruitY );
 
+    // Fill map with false ( empty space )
     for ( int i = 0; i < MAP_ROWS; ++i ) {
         for ( int j = 0; j < MAP_COLS; ++j ) {
             map[j][i] = false;
         }
     }
 
+    // Fill tiles with snake in them with true ( obstacle )
     for ( int i = 0; i < snakeToMove->length; ++i ) {
         int x = snakeToMove->body[i] % MAP_COLS;
         int y = ( snakeToMove->body[i] - x ) / MAP_COLS;
@@ -71,6 +74,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     // 0 - left, 1 - up, 2 - right, 3- down
     int moveGrades[4];
 
+    // Grade all head directions
     for ( int i = 0; i < 4; ++i ) {
         int posX = 0, posY = 0;
         switch ( i )
@@ -111,6 +115,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         }
     }
 
+    // Get the best and second best move direction
     int bestMove = 0;
     int secondBestMove = 0;
     int bestGrade = -2;
@@ -122,6 +127,7 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         }
     }
     
+    // Get actual head direction
     int heading;
     if ( headDirectionX == - 1 ) {
         heading = 0;
@@ -133,11 +139,12 @@ int generateAiMove ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         heading = 3;
     }
 
+    // If the best move is to go back use second best move direction
     if ( bestMove == (heading + 2) % 4 ) {
         bestMove = secondBestMove;
     }
     
-
+    // Translate move direction to direction change and return corresponding integer
     if ( bestMove == (heading + 1) % 4 ) {
         return 1;
     } else if ( bestMove == (heading +3) % 4 ) {
