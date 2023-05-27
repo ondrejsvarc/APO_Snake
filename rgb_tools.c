@@ -1,20 +1,7 @@
 #include "rgb_tools.h"
 
-#define _POSIX_C_SOURCE 200112L
- 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <time.h>
-#include <unistd.h>
-#include <termios.h>            //termios, TCSANOW, ECHO, ICANON
- 
-#include "mzapo_parlcd.h"
-#include "mzapo_phys.h"
-#include "mzapo_regs.h"
-
 void reset_RGB_LED ( unsigned char* mem_base ) {
+    // Turn of the RGB LEDs
     *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB1_o ) = 0x0;
     *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_RGB2_o ) = 0x0;
 }
