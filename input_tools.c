@@ -1,23 +1,3 @@
-/*******************************************************************
-  input_tools.c containing functions for translating knob movements to
-  change of directions.
- 
-  Created by Ondrej Svarc and Michal Komanec.
- 
- *******************************************************************/
- 
-#define _POSIX_C_SOURCE 200112L
- 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <time.h>
-#include <unistd.h>
-#include <termios.h>            //termios, TCSANOW, ECHO, ICANON
- 
-#include "mzapo_parlcd.h"
-#include "mzapo_phys.h"
-#include "mzapo_regs.h"
 #include "input_tools.h"
 
 unsigned char redValue = 0;
@@ -27,6 +7,7 @@ unsigned char greenValue = 0;
 bool abort_game ( unsigned char *mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
 
+    // Check if red and blue knobs are pressed
     if ( ( r&0x1000000 ) != 0 && ( r&0x4000000 ) != 0 ) {
         return true;
     }
@@ -36,63 +17,63 @@ bool abort_game ( unsigned char *mem_base ) {
 bool pressGreen ( unsigned char *mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
 
+    // Check if green knob is pressed
     if ( ( r&0x2000000 ) != 0 ) {
         return true;
     }
     return false;
 }
 
-void getValues ( unsigned char *mem_base ) {
+void get_values ( unsigned char *mem_base ) {
     int r = *( volatile uint32_t * ) ( mem_base + SPILED_REG_KNOBS_8BIT_o );
 
+    // Get values of all knobs
     redValue = ( r>>16 )&0xff;
     blueValue = r&0xff;
     greenValue = ( r>>8 )&0xff;
 }
 
-int getDirection ( int value, int previousValue ) {
+int get_direction ( int value, int previousValue ) {
     int compValue = value + 256;
     int compPreviousValue = previousValue + 256;
+    // Compare values and return change of direction as a movement
     if ( compValue > compPreviousValue + 3) {
-        //printf( "Goes right.\n" );
+        // Right
         return 1;
     } else if ( compValue < compPreviousValue - 3) {
-        //printf( "Goes left.\n" );
+        // Left
         return -1;
     }
-    //printf( "Goes straight.\n" );
+    // Straight
     return 0;
 }
 
 int getRedValue ( unsigned char *mem_base ) {
-    getValues( mem_base );
+    get_values( mem_base );
     return redValue;
 }
 
 int getRedMovement ( unsigned char *mem_base, int previousValue ) {
     int value = getRedValue( mem_base );
-    //printf( "Red value: %d\n", value );
-    return getDirection( value, previousValue );
+    return get_direction( value, previousValue );
 }
 
 int getBlueValue ( unsigned char *mem_base ) {
-    getValues( mem_base );
+    get_values( mem_base );
     return blueValue;
 }
 
 int getBlueMovement ( unsigned char *mem_base, int previousValue ) {
     int value = getBlueValue( mem_base );
-    //printf( "Blue value: %d\n", value );
-    return getDirection( value, previousValue );
+    return get_direction( value, previousValue );
 }
 
 int getGreenValue ( unsigned char *mem_base ) {
-    getValues( mem_base );
+    get_values( mem_base );
     return greenValue;
 }
 
 int getGreenMovement ( unsigned char *mem_base, int previousValue ) {
     int value = getGreenValue( mem_base );
-    //printf( "Green value: %d\n", value );
-    return getDirection( value, previousValue );
+    return get_direction( value, previousValue );
 }

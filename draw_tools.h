@@ -1,3 +1,10 @@
+/*******************************************************************
+  draw_tools.h containing functions for drawing to frame buffer.
+ 
+  Created by Ondrej Svarc and Michal Komanec.
+ 
+ *******************************************************************/
+
 #include <stdlib.h>
 #include <stdio.h>
 

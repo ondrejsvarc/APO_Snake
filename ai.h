@@ -1,3 +1,11 @@
+/*******************************************************************
+  ai.h containing functions that generates ai moves and generates
+  new fruit positions.
+ 
+  Created by Ondrej Svarc and Michal Komanec.
+ 
+ *******************************************************************/
+
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
