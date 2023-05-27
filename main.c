@@ -1,3 +1,10 @@
+/*******************************************************************
+  main.c containing the main functions for the Snake game.
+ 
+  Created by Michal Komanec and Ondrej Svarc.
+ 
+ *******************************************************************/
+
 #define _POSIX_C_SOURCE 200112L
 
 #include <stdlib.h>

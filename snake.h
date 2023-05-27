@@ -1,3 +1,10 @@
+/*******************************************************************
+  snake.c containing struct and functions for moving Snake.
+ 
+  Created by Michal Komanec and Ondrej Svarc.
+ 
+ *******************************************************************/
+
 #ifndef SNAKE_H
 #define SNAKE_H
 
@@ -11,12 +18,18 @@
 #define MAP_COLS 24
 #endif
 
+/**
+ * @struct Snake
+ * Represents a snake in the game.
+ */
 typedef struct {
-    short heading[2];
-    short body[MAP_COLS*MAP_ROWS];
-    unsigned short length;
-    int score;
-    unsigned short color;
+    short heading[2];               // An array representing the heading direction of the snake.
+                                    // Index 0 corresponds to the x-coordinate and 
+                                    // index 1 corresponds to the y-coordinate.
+    short body[MAP_COLS*MAP_ROWS];  // An array representing the positions of the snake's body.
+    unsigned short length;          // The current length of the snake's body.
+    int score;                      // The score accumulated by the snake during the game.
+    unsigned short color;           // The color code used to represent the snake visually in the game.
 } Snake;
 
 /**

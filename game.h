@@ -1,3 +1,10 @@
+/**********************************************************************
+  game.c containing functions for starting and running a game of Snake.
+ 
+  Created by Michal Komanec and Ondrej Svarc.
+ 
+ *********************************************************************/
+
 #include "snake.h"
 #include "mzapo_parlcd.h"
 #include "input_tools.h"
