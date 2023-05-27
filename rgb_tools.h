@@ -1,5 +1,5 @@
 /*******************************************************************
-  rgb_tools.c containing functions for manipulating with the 
+  rgb_tools.c containing functions for manipulating the 
   RGB LEDs.
  
   Created by Ondrej Svarc and Michal Komanec.
