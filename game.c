@@ -1,6 +1,5 @@
 #include "game.h"
 
-/*Start a game of snake with zero human players and two "AI" players.*/
 void start_zero_players_game(long int speed, unsigned short *fb, unsigned char *mem_base, unsigned char *parlcd_mem_base) {
     // fill the frame buffer
     paint_it_black(fb);
@@ -106,7 +105,6 @@ void start_zero_players_game(long int speed, unsigned short *fb, unsigned char *
     game_over(ai_snake1.score, ai_snake2.score, fb, mem_base, parlcd_mem_base);
 }
 
-/*Start a game of snake with one human player and one "AI" player.*/
 void start_one_player_game(long int speed, unsigned short *fb, unsigned char *mem_base, unsigned char *parlcd_mem_base) {
     // fill the frame buffer
     paint_it_black(fb);
@@ -217,7 +215,6 @@ void start_one_player_game(long int speed, unsigned short *fb, unsigned char *me
     game_over(ai_snake.score, player_snake.score, fb, mem_base, parlcd_mem_base);
 }
 
-/*Start a game of snake with two human players.*/
 void start_two_players_game(long int speed, unsigned short *fb, unsigned char *mem_base, unsigned char *parlcd_mem_base) {
     // fill the frame buffer
     paint_it_black(fb);
@@ -333,7 +330,6 @@ void start_two_players_game(long int speed, unsigned short *fb, unsigned char *m
     game_over(player1_snake.score, player2_snake.score, fb, mem_base, parlcd_mem_base);
 }
 
-/*Draw and show game over screen.*/
 void game_over(int score1, int score2, unsigned short *fb, unsigned char *mem_base, unsigned char *parlcd_mem_base) {
     // draw game over screen to frame buffer
     draw_game_over(score1, score2, fb);

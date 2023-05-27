@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-/*Open game menu.*/
+/*Open game menu, show options and interact with user.*/
 void start_menu() {
   // reset LEDs
   changeLengthLed(0, 0, mem_base);
