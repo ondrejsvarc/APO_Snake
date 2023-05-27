@@ -1,33 +1,16 @@
-/*******************************************************************
-  led_tools.c containing functions for manipulating with the 
-  LEDs.
+#include "led_tools.h"
  
-  Created by Ondrej Svarc and Michal Komanec.
- 
- *******************************************************************/
- 
-#define _POSIX_C_SOURCE 200112L
- 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <time.h>
-#include <unistd.h>
-#include <termios.h>            //termios, TCSANOW, ECHO, ICANON
- 
-#include "mzapo_parlcd.h"
-#include "mzapo_phys.h"
-#include "mzapo_regs.h"
-
 void changeLengthLed ( unsigned short length1, unsigned short length2, unsigned char* mem_base ) {
+    // Get ones and tens of the lengths
     short ones1 = length1 % 10;
     short tens1 = ( length1 - ones1 ) / 10;
     short ones2 = length2 % 10;
     short tens2 = ( length2 - ones2 ) / 10;
 
+    // Create final value
     int finalValue = 0;
     
+    // Add powers of 2 to the final value based on leds that should be turned on
     for ( int i = 0; i < ones2; ++i ) {
         int power = 1;
         for ( int j = 0; j < i; ++j ) {
@@ -60,5 +43,6 @@ void changeLengthLed ( unsigned short length1, unsigned short length2, unsigned 
         finalValue += power;
     }
 
+    // Turn on the leds
     *( volatile uint32_t * ) ( mem_base + SPILED_REG_LED_LINE_o ) = finalValue;
 }
