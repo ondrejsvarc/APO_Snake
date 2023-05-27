@@ -1,6 +1,11 @@
 
 #include "snake.h"
 
+/*Move the first snake, check for all types of collisions, write changes to frame buffer and possibly eat fruit.
+
+  If fruit is eaten, its position is set to -1.
+  If snake dies, its length is set to 0 and its body gets blacked out in the frame buffer
+*/
 void move_snake(Snake *snake, Snake *other_snake, short direction, int *fruit_pos, unsigned short *fb) {
     change_heading(snake, direction);
 
@@ -73,6 +78,10 @@ void move_snake(Snake *snake, Snake *other_snake, short direction, int *fruit_po
     }
 }
 
+/*Change heading of the given snake with heading_change. 
+
+  heading_change: {-1 = turn left, 0 = keep straight, 1 = turn right}
+*/
 void change_heading(Snake *snake, short heading_change) {
     short old_heading[2] = {snake->heading[0], snake->heading[1]};
     if (heading_change == -1) {
