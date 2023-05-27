@@ -17,6 +17,9 @@
 #define COLOR_BLACK 0x0
 #define COLOR_YELLOW 0xffe0
 
+#define PATH_TO_MENU_IMAGE "/tmp/komanmi1/snake.ppm"  // replace "/tmp/komanmi1" with path to target directory
+
+
 /**
  * Fills the framebuffer with black color.
  *

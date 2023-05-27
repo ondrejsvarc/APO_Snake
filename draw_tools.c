@@ -282,7 +282,7 @@ void draw_difficulty_choice (int choice, unsigned short *fb ) {
 
 void draw_menu(unsigned short *fb) {
   // Open ppm menu image
-  FILE *menu_img_file = fopen("/tmp/komanmi1/snake.ppm", "rb");
+  FILE *menu_img_file = fopen(PATH_TO_MENU_IMAGE, "rb");
   if (menu_img_file == NULL) {
       fprintf(stderr, "Error opening snake.ppm");
       exit(1);
