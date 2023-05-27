@@ -20,6 +20,15 @@
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 
+
+#define LED_RED 0xff0000
+#define LED_BLUE 0xff
+#define LED_GREEN 0xff00
+#define LED_OFF 0x0
+#define ALIVE_STATUS 0
+#define FRUIT_STATUS 1
+#define DEAD_STATUS 2
+
 /**
  * Turns off the RGB LEDs.
  *
