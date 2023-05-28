@@ -192,10 +192,10 @@ int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex )
     int grades[4];
 
     // Get distances
-    distances[0] = count_fruit_distance( headX - 1, headY, fruitX, fruitY ); // left
-    distances[1] = count_fruit_distance( headX, headY - 1, fruitX, fruitY ); // up
-    distances[2] = count_fruit_distance( headX + 1, headY, fruitX, fruitY ); // right
-    distances[3] = count_fruit_distance( headX, headY + 1, fruitX, fruitY ); // down
+    distances[0] = get_fruit_distance( headX - 1, headY, fruitX, fruitY, map ); // left
+    distances[1] = get_fruit_distance( headX, headY - 1, fruitX, fruitY, map ); // up
+    distances[2] = get_fruit_distance( headX + 1, headY, fruitX, fruitY, map ); // right
+    distances[3] = get_fruit_distance( headX, headY + 1, fruitX, fruitY, map ); // down
 
     // Get areas
     map_data_copy( mapTemp, map );
@@ -288,4 +288,73 @@ void map_data_copy ( bool target[MAP_COLS][MAP_ROWS], bool source[MAP_COLS][MAP_
             target[i][j] = source[i][j];
         }
     }
+}
+
+int get_fruit_distance ( int x, int y, int fruitX, int fruitY, bool map[MAP_COLS][MAP_ROWS] ) {
+    // Create a queue
+    Coordinate* queue = malloc( MAP_COLS * MAP_ROWS * sizeof(Coordinate) );
+    int front = 0;
+    int rear = 0;
+
+    // Visited array
+    bool visited[MAP_COLS][MAP_ROWS];
+    for ( int i = 0; i < MAP_COLS; ++i ) {
+        for ( int j = 0; j < MAP_ROWS; ++j ) {
+            visited[i][j] = false;
+        }
+    }
+
+    // Distances array
+    bool distances[MAP_COLS][MAP_ROWS];
+    for ( int i = 0; i < MAP_COLS; ++i ) {
+        for ( int j = 0; j < MAP_ROWS; ++j ) {
+            distances[i][j] = INT_MAX;
+        }
+    }
+
+    Coordinate start;
+    start.x = x;
+    start.y = y;
+
+    // Enqueue start
+    queue[rear++] = start;
+    visited[start.x][start.y] = true;
+    distances[start.x][start.y] = 0;
+
+    // Movements
+    int dx[] = {-1, 1, 0, 0};
+    int dy[] = {0, 0, -1, 1};
+
+    // Get distances
+    while ( front != rear ) {
+        // Dequeue
+        Coordinate current = queue[front++];
+
+        // Is it fruit?
+        if ( current.x == fruitX && current.y == fruitY ) {
+            free( queue );
+            return distances[current.x][current.y];
+        }
+
+        // Neighbors
+        for ( int i = 0; i < 4; ++i ) {
+            int newX = current.x + dx[i];
+            int newY = current.y + dy[i];
+
+            // Is coordinate valid and is it not an obstacle?
+            if ( newX >= 0 && newX < MAP_COLS && newY >= 0 && newY < MAP_ROWS && !map[newX][newY] && !visited[newX][newY] ) {
+                Coordinate next;
+                next.x = newX;
+                next.y = newY;
+
+                // Enqueue
+                queue[rear++] = next;
+                visited[next.x][next.y] = true;
+                distances[next.x][next.y] = distances[current.x][current.y] + 1;
+            }
+        }
+    }
+
+    free( queue );
+    return 1000; // Return 1000 if no path found
 }

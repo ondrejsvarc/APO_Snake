@@ -9,8 +9,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #include "snake.h"
+
+typedef struct {
+  int x;
+  int y;
+} Coordinate;
 
 /**
  * Generates a random position for the fruit on the game map that is not occupied by the snakes.
@@ -41,3 +47,5 @@ int count_fruit_distance ( int x, int y, int fruitX, int fruitY );
 int count_area_size ( int x, int y, bool map[MAP_COLS][MAP_ROWS] );
 
 void map_data_copy ( bool target[MAP_COLS][MAP_ROWS], bool source[MAP_COLS][MAP_ROWS] );
+
+int get_fruit_distance ( int x, int y, int fruitX, int fruitY, bool map[MAP_COLS][MAP_ROWS] );
