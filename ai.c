@@ -158,6 +158,7 @@ int generate_AI_move (Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
 int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     // Get initial information
     bool map[MAP_COLS][MAP_ROWS];
+    bool mapTemp[MAP_COLS][MAP_ROWS];
     int fruitX = fruitIndex % MAP_COLS;
     int fruitY = ( fruitIndex - fruitX ) / MAP_COLS;
     int headX = snakeToMove->body[0] % MAP_COLS;
@@ -197,10 +198,14 @@ int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex )
     distances[3] = count_fruit_distance( headX, headY + 1, fruitX, fruitY ); // down
 
     // Get areas
-    areas[0] = count_area_size( headX - 1, headY, map ); // left
-    areas[1] = count_area_size( headX, headY - 1, map ); // up
-    areas[2] = count_area_size( headX + 1, headY, map ); // right
-    areas[3] = count_area_size( headX, headY + 1, map ); // down
+    map_data_copy( mapTemp, map );
+    areas[0] = count_area_size( headX - 1, headY, mapTemp ); // left
+    map_data_copy( mapTemp, map );
+    areas[1] = count_area_size( headX, headY - 1, mapTemp ); // up
+    map_data_copy( mapTemp, map );
+    areas[2] = count_area_size( headX + 1, headY, mapTemp ); // right
+    map_data_copy( mapTemp, map );
+    areas[3] = count_area_size( headX, headY + 1, mapTemp ); // down
 
     // Get grades
     for ( int i = 0; i < 4; ++i ) {
@@ -275,4 +280,12 @@ int count_area_size ( int x, int y, bool map[MAP_COLS][MAP_ROWS] ) {
     areaSize += count_area_size( x, y - 1, map ); // Up
 
     return areaSize;
+}
+
+void map_data_copy ( bool target[MAP_COLS][MAP_ROWS], bool source[MAP_COLS][MAP_ROWS] ) {
+    for ( int i = 0; i < MAP_COLS; ++i ) {
+        for ( int j = 0; j < MAP_ROWS; ++j ) {
+            target[i][j] = source[i][j];
+        }
+    }
 }
