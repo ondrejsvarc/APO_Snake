@@ -59,11 +59,11 @@ int main(int argc, char *argv[]) {
 /*Open game menu, show options and interact with user.*/
 void start_menu() {
   // reset LEDs
-    change_LED_strip_length(0, 0, mem_base);
+  change_LED_strip_length(0, 0, mem_base);
   reset_RGB_LED(mem_base);
 
   // draw menu image
-    draw_menu(fb);
+  draw_menu(fb);
 
   // write frame buffer to LCD display
   for (int i = 0; i < 320*480; i++) {
@@ -82,6 +82,11 @@ void start_menu() {
 
   short move_green;
   short move_blue;
+
+  for (int i = 0; i < 320*480; i++) {
+    parlcd_write_data(parlcd_mem_base, fb[i]);
+  }
+  parlcd_write_cmd(parlcd_mem_base, 0x2c);
 
   while (1) {
       // handle encoders
