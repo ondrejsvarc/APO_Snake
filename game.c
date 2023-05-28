@@ -53,7 +53,7 @@ void start_zero_players_game(long int speed, unsigned short *fb, unsigned char *
         // check if snake is alive
         if (ai_snake1.length > 0) {
             change_red_RGB_LED(ALIVE_STATUS, mem_base);
-            ai_move1 = generate_AI_move(&ai_snake1, &ai_snake2, fruit_pos);
+            ai_move1 = generate_smart_AI_move(&ai_snake1, &ai_snake2, fruit_pos);
             move_snake(&ai_snake1, &ai_snake2, ai_move1, &fruit_pos, fb);
             // check if snake died
             if (ai_snake1.length == 0) {
@@ -70,7 +70,7 @@ void start_zero_players_game(long int speed, unsigned short *fb, unsigned char *
         // check if snake is alive
         if (ai_snake2.length > 0) {
             change_blue_RGB_LED(ALIVE_STATUS, mem_base);
-            ai_move2 = generate_AI_move(&ai_snake2, &ai_snake1, fruit_pos);
+            ai_move2 = generate_smart_AI_move(&ai_snake2, &ai_snake1, fruit_pos);
             move_snake(&ai_snake2, &ai_snake1, ai_move2, &fruit_pos, fb);
             // check if snake died
             if (ai_snake2.length == 0) {
