@@ -33,3 +33,9 @@ int generate_fruit_position (Snake *snake1, Snake *snake2 );
  *         -1 for left, 0 for no change, 1 for right.
  */
 int generate_AI_move (Snake *snakeToMove, Snake *snake2, int fruitIndex );
+
+int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex );
+
+int count_fruit_distance ( int x, int y, int fruitX, int fruitY );
+
+int count_area_size ( int x, int y, bool map[MAP_COLS][MAP_ROWS] );

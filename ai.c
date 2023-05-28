@@ -153,3 +153,132 @@ int generate_AI_move (Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
         return 0;
     }
 }
+
+
+int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
+    // Get initial information
+    bool map[MAP_COLS][MAP_ROWS];
+    int fruitX = fruitIndex % MAP_COLS;
+    int fruitY = ( fruitIndex - fruitX ) / MAP_COLS;
+    int headX = snakeToMove->body[0] % MAP_COLS;
+    int headY = ( snakeToMove->body[0] - headX ) / MAP_COLS;
+    short headDirectionX = snakeToMove->heading[0];
+    short headDirectionY = snakeToMove->heading[1];
+
+    // Fill map with false ( empty space )
+    for ( int i = 0; i < MAP_ROWS; ++i ) {
+        for ( int j = 0; j < MAP_COLS; ++j ) {
+            map[j][i] = false;
+        }
+    }
+
+    // Fill tiles with snake in them with true ( obstacle )
+    for ( int i = 0; i < snakeToMove->length; ++i ) {
+        int x = snakeToMove->body[i] % MAP_COLS;
+        int y = ( snakeToMove->body[i] - x ) / MAP_COLS;
+        map[x][y] = true;
+    }
+
+    for ( int i = 0; i < snake2->length; ++i ) {
+        int x = snake2->body[i] % MAP_COLS;
+        int y = ( snake2->body[i] - x ) / MAP_COLS;
+        map[x][y] = true;
+    }
+
+    // 0 - left, 1 - up, 2 - right, 3- down
+    int distances[4];
+    int areas[4];
+    int grades[4];
+
+    // Get distances
+    distances[0] = count_fruit_distance( headX - 1, headY, fruitX, fruitY ); // left
+    distances[1] = count_fruit_distance( headX, headY - 1, fruitX, fruitY ); // up
+    distances[2] = count_fruit_distance( headX + 1, headY, fruitX, fruitY ); // right
+    distances[3] = count_fruit_distance( headX, headY + 1, fruitX, fruitY ); // down
+
+    // Get areas
+    areas[0] = count_area_size( headX - 1, headY, map ); // left
+    areas[1] = count_area_size( headX, headY - 1, map ); // up
+    areas[2] = count_area_size( headX + 1, headY, map ); // right
+    areas[3] = count_area_size( headX, headY + 1, map ); // down
+
+    // Get grades
+    for ( int i = 0; i < 4; ++i ) {
+        grades[i] = distances[i];
+
+        if ( areas[i] == 0 ) {
+            grades[i] += 1000;
+        }
+
+        if ( areas[i] < snakeToMove->length ) {
+            grades[i] += 200;
+        }
+    }
+
+    // Get the best and second best move direction
+    int bestMove = 0;
+    int secondBestMove = 0;
+    int bestGrade = 10000;
+    for ( int i = 0; i < 4; ++i ) {
+        if ( grades[i] <= bestGrade ) {
+            secondBestMove = bestMove;
+            bestGrade = grades[i];
+            bestMove = i;
+        }
+    }
+
+    // Get actual head direction
+    int heading;
+    if ( headDirectionX == - 1 ) {
+        heading = 0;
+    } else if ( headDirectionX == 1 ) {
+        heading = 2;
+    } else if ( headDirectionY == 1 ) {
+        heading = 1;
+    } else {
+        heading = 3;
+    }
+
+    // If the best move is to go back use second best move direction
+    if ( bestMove == (heading + 2) % 4 ) {
+        bestMove = secondBestMove;
+    }
+    
+    // Translate move direction to direction change and return corresponding integer
+    if ( bestMove == (heading + 1) % 4 ) {
+        return 1;
+    } else if ( bestMove == (heading +3) % 4 ) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+int count_fruit_distance ( int x, int y, int fruitX, int fruitY ) {
+    if ( x < 0 || x >= MAP_COLS || y < 0 || y >= MAP_ROWS ) {
+        return 1000;
+    }
+
+    int deltaX = abs( x - fruitX );
+    int deltaY = abs( y - fruitY );
+
+    return deltaX + deltaY;
+}
+
+int count_area_size ( int x, int y, bool map[MAP_COLS][MAP_ROWS] ) {
+    if ( x < 0 || x >= MAP_COLS || y < 0 || y >= MAP_ROWS || map[x][y] == true ) {
+        return 0;
+    }
+
+    // Mark visited
+    map[x][y] = true;
+
+    int areaSize = 1;
+
+    areaSize += count_area_size( x + 1, y, map ); // Right
+    areaSize += count_area_size( x - 1, y, map ); // Left
+    areaSize += count_area_size( x, y + 1, map ); // Down
+    areaSize += count_area_size( x, y - 1, map ); // Up
+
+    return areaSize;
+}
