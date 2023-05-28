@@ -64,6 +64,7 @@ void draw_fruit (int index, unsigned short *fb );
 
 /**
  * Converts an integer to a string representation.
+ * If the number is bigger than 99999 it fills sthe string with 9.
  *
  * @param str The character array to store the resulting string.
  * @param num The integer to be converted to a string.
