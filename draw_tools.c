@@ -173,12 +173,19 @@ void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb, 
 
 void to_string ( char str[], int num ) {
     int i, rem, len = 5;
-    // Transfer number to string
-    for (i = 0; i < len; i++)
-    {
-        rem = num % 10;
-        num = num / 10;
-        str[len - (i + 1)] = rem + '0';
+    if ( num >= 99999 ) {
+        // Make the number 99999
+        for ( i = 0; i < len; ++i ) {
+            str[i] = 9 + '0';
+        }
+    } else {
+        // Transfer number to string
+        for (i = 0; i < len; i++)
+        {
+            rem = num % 10;
+            num = num / 10;
+            str[len - (i + 1)] = rem + '0';
+        }
     }
     str[len] = '\0';
 }
