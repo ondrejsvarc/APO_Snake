@@ -185,7 +185,7 @@ int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex )
         map[x][y] = true;
     }
 
-    // 0 - left, 1 - up, 2 - right, 3- down
+    // 0 - left, 1 - up, 2 - right, 3 - down
     int distances[4];
     int areas[4];
     int grades[4];
@@ -215,18 +215,6 @@ int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex )
         }
     }
 
-    // Get the best and second best move direction
-    int bestMove = 0;
-    int secondBestMove = 0;
-    int bestGrade = 10000;
-    for ( int i = 0; i < 4; ++i ) {
-        if ( grades[i] <= bestGrade ) {
-            secondBestMove = bestMove;
-            bestGrade = grades[i];
-            bestMove = i;
-        }
-    }
-
     // Get actual head direction
     int heading;
     if ( headDirectionX == - 1 ) {
@@ -238,16 +226,22 @@ int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex )
     } else {
         heading = 3;
     }
+    grades[(heading + 2) % 4] += 5000;
 
-    // If the best move is to go back use second best move direction
-    if ( bestMove == (heading + 2) % 4 ) {
-        bestMove = secondBestMove;
+    // Get the best move direction
+    int bestMove = 0;
+    int bestGrade = 10000;
+    for ( int i = 0; i < 4; ++i ) {
+        if ( grades[i] < bestGrade ) {
+            bestGrade = grades[i];
+            bestMove = i;
+        }
     }
     
     // Translate move direction to direction change and return corresponding integer
     if ( bestMove == (heading + 1) % 4 ) {
         return 1;
-    } else if ( bestMove == (heading +3) % 4 ) {
+    } else if ( bestMove == (heading + 3) % 4 ) {
         return -1;
     } else {
         return 0;
