@@ -154,7 +154,6 @@ int generate_AI_move (Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     }
 }
 
-
 int generate_smart_AI_move ( Snake *snakeToMove, Snake *snake2, int fruitIndex ) {
     // Get initial information
     bool map[MAP_COLS][MAP_ROWS];
