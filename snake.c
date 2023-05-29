@@ -17,7 +17,7 @@ void move_snake(Snake *snake, Snake *other_snake, short heading_change, int *fru
     }
 
     // check for collision with itself 
-    for (int i = 0; i < snake->length; i++) {
+    for (int i = 0; i < snake->length-1; i++) {
         if (new_head_position == snake->body[i]) {
             for (int j = 0; j < snake->length; j++) {
                 draw_tile(snake->body[j], COLOR_BLACK, fb);
