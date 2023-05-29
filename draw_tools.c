@@ -96,20 +96,20 @@ void draw_game_over ( int score1, int score2, unsigned short *fb ) {
 
 void draw_score ( int score1, int score2, unsigned short *fb ) {
     // draw black boxes
-    for ( int i = 0; i < 40; ++i ) {
+    for ( int i = 0; i < 48; ++i ) {
         for ( int j = 0; j < 16; ++j ) {
             draw_pixel( i, j, 0, fb );
         }
     }
 
-    for ( int i = 440; i < 480; ++i ) {
+    for ( int i = 432; i < 480; ++i ) {
         for ( int j = 0; j < 16; ++j ) {
             draw_pixel( i, j, 0, fb );
         }
     }
 
     // Get number strings
-    char num1[6], num2[6];
+    char num1[7], num2[7];
     to_string( num1, score1 );
     to_string( num2, score2 );
 
@@ -119,13 +119,15 @@ void draw_score ( int score1, int score2, unsigned short *fb ) {
     draw_char(16, 0, num1[2], COLOR_WHITE, fb, 1);
     draw_char(24, 0, num1[3], COLOR_WHITE, fb, 1);
     draw_char(32, 0, num1[4], COLOR_WHITE, fb, 1);
+    draw_char(40, 0, num1[5], COLOR_WHITE, fb, 1);
 
     // Print score2
-    draw_char(440, 0, num2[0], COLOR_WHITE, fb, 1);
-    draw_char(448, 0, num2[1], COLOR_WHITE, fb, 1);
-    draw_char(456, 0, num2[2], COLOR_WHITE, fb, 1);
-    draw_char(464, 0, num2[3], COLOR_WHITE, fb, 1);
-    draw_char(472, 0, num2[4], COLOR_WHITE, fb, 1);
+    draw_char(432, 0, num2[0], COLOR_WHITE, fb, 1);
+    draw_char(440, 0, num2[1], COLOR_WHITE, fb, 1);
+    draw_char(448, 0, num2[2], COLOR_WHITE, fb, 1);
+    draw_char(456, 0, num2[3], COLOR_WHITE, fb, 1);
+    draw_char(464, 0, num2[4], COLOR_WHITE, fb, 1);
+    draw_char(472, 0, num2[5], COLOR_WHITE, fb, 1);
 }
 
 void draw_pixel_big(int x, int y, unsigned short color, unsigned short *fb, int scale ) {
@@ -172,9 +174,9 @@ void draw_char(int x, int y, char ch, unsigned short color, unsigned short *fb, 
 }
 
 void to_string ( char str[], int num ) {
-    int i, rem, len = 5;
-    if ( num >= 99999 ) {
-        // Make the number 99999
+    int i, rem, len = 6;
+    if ( num >= 999999 ) {
+        // Make the number 999999
         for ( i = 0; i < len; ++i ) {
             str[i] = 9 + '0';
         }
